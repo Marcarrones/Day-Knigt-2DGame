@@ -2,5 +2,5 @@
 *.opensdf
 *.vcxproj.filters
 */.vs
-./DayKnight/Debug
-./DayKnight/Release
+/Debug
+/Release
