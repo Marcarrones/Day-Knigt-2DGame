@@ -90,9 +90,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\haope\Desktop\Day-Knigt-2DGame\libs\Simple OpenGL Image Library\src;C:\Users\haope\Desktop\Day-Knigt-2DGame\libs\freeglut\include;C:\Users\haope\Desktop\Day-Knigt-2DGame\libs\glew-1.13.0\include;C:\Users\haope\Desktop\Day-Knigt-2DGame\libs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SOIL.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\haope\Desktop\Day-Knigt-2DGame\libs\Simple OpenGL Image Library\projects\VC9\Debug;C:\Users\haope\Desktop\Day-Knigt-2DGame\libs\freeglut\lib;C:\Users\haope\Desktop\Day-Knigt-2DGame\libs\glew-1.13.0\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

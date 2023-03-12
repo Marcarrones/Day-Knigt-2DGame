@@ -1,0 +1,11 @@
+﻿  TileMap.cpp
+  Texture.cpp
+  Sprite.cpp
+  ShaderProgram.cpp
+  Shader.cpp
+  Scene.cpp
+  Player.cpp
+  main.cpp
+  Game.cpp
+  Generando código...
+LINK : fatal error LNK1104: no se puede abrir el archivo 'SOIL.lib'
