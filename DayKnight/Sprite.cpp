@@ -11,6 +11,9 @@ Sprite *Sprite::createSprite(const glm::vec2 &quadSize, const glm::vec2 &sizeInS
 	return quad;
 }
 
+Sprite::Sprite() {
+
+}
 
 Sprite::Sprite(const glm::vec2 &quadSize, const glm::vec2 &sizeInSpritesheet, Texture *spritesheet, ShaderProgram *program)
 {
@@ -116,3 +119,7 @@ void Sprite::setAngle(const float newAngle) { angle = newAngle; }
 
 
 
+void Sprite::setScale(const glm::vec3& sc)
+{
+	scale = sc;
+}

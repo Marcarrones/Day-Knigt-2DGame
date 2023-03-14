@@ -23,6 +23,8 @@ public:
 	// Textured quads can only be created inside an OpenGL context
 	static Sprite *createSprite(const glm::vec2 &quadSize, const glm::vec2 &sizeInSpritesheet, Texture *spritesheet, ShaderProgram *program);
 
+	Sprite();
+
 	void update(int deltaTime);
 	void render() const;
 	void free();
@@ -36,6 +38,8 @@ public:
 	void setPosition(const glm::vec2 &pos);
 	void setAngle(const float angle);
 
+	void setScale(const glm::vec3 & sc);
+
 private:
 	Texture *texture;
 	ShaderProgram *shaderProgram;
@@ -43,6 +47,7 @@ private:
 	GLuint vbo;
 	GLint posLocation, texCoordLocation;
 	glm::vec2 position;
+	glm::vec3 scale;
 	float angle;
 	int currentAnimation, currentKeyframe;
 	float timeAnimation;
