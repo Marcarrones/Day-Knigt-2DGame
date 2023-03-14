@@ -1,6 +1,7 @@
 *.sdf
 *.opensdf
-*.vcxproj.filters
 */.vs
 */Debug
 */Release
+*/*.VC.db
+*/*.VC.opendb
