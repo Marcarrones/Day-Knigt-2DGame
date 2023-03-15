@@ -11,7 +11,7 @@ class Text
 
 public:
 	~Text();
-	void init(const glm::ivec2& pos, ShaderProgram& shaderProgram, int size, int color, string text);
+	void init(const glm::ivec2& pos, ShaderProgram& shaderProgram, int size, string text);
 	void update(int deltaTime);
 	void render();
 

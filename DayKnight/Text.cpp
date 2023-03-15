@@ -2,7 +2,6 @@
 #include <iostream>
 #include <GL/glew.h>
 #include <GL/glut.h>
-#include "Object.h"
 #include "Text.h"
 
 
@@ -18,27 +17,16 @@ Text::~Text() {
 		delete sprite;
 }
 
-void Text::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, int size, int color, string newText)
+void Text::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, int size,string newText)
 {
 	posText = tileMapPos;
 	sizeText = newText.size();
 	shader = shaderProgram;
 	sprite = new Sprite[sizeText];
-	switch (color)
-	{
-	case 1:
-		spritesheet.loadFromFile("images/tipografia_red.png", TEXTURE_PIXEL_FORMAT_RGBA);
-		break;
-	case 2:
-		spritesheet.loadFromFile("images/tipografia_blue.png", TEXTURE_PIXEL_FORMAT_RGBA);
-		break;
-	case 3:
-		spritesheet.loadFromFile("images/tipografia_green.png", TEXTURE_PIXEL_FORMAT_RGBA);
-		break;
-	default:
-		spritesheet.loadFromFile("images/tipografia.png", TEXTURE_PIXEL_FORMAT_RGBA);
-		break;
-	}
+
+
+	spritesheet.loadFromFile("images/tipografia.png", TEXTURE_PIXEL_FORMAT_RGBA);
+
 	initSprites(size);
 	setText(newText);
 }

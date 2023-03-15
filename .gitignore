@@ -5,3 +5,5 @@
 */Release
 */*.VC.db
 */*.VC.opendb
+/DayKnight/DayKnight.aps
+/DayKnight/DayKnight.rc
