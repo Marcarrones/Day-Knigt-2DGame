@@ -1,7 +1,7 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include "Game.h"
-
+#include <iostream>
 
 void Game::init()
 {
@@ -27,6 +27,7 @@ void Game::keyPressed(int key)
 {
 	if(key == 27) // Escape code
 		bPlay = false;
+	std::cout << key << endl;
 	keys[key] = true;
 }
 
