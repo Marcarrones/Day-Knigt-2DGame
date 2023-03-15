@@ -3,6 +3,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "Scene.h"
 #include "Game.h"
+#include "Text.h"
 
 
 #define SCREEN_X 32
@@ -37,12 +38,14 @@ void Scene::init()
 	player->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
+	randomText();
 }
 
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
+	randomText();
 }
 
 void Scene::render()
@@ -89,5 +92,8 @@ void Scene::initShaders()
 	fShader.free();
 }
 
-
+void Scene::randomText() {
+	Text *text = new Text();
+	text->init(glm::vec2(288.f, 160.f), texProgram, 2, "PLAY");
+}
 

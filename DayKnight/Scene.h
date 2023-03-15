@@ -22,7 +22,7 @@ public:
 	void init();
 	void update(int deltaTime);
 	void render();
-
+	void randomText();
 private:
 	void initShaders();
 
@@ -32,7 +32,6 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
-
 };
 
 
