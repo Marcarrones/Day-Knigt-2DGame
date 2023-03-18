@@ -31,6 +31,12 @@
     <ClCompile Include="Text.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Credits.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimKeyframes.h">
@@ -61,6 +67,12 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="Text.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Credits.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>
