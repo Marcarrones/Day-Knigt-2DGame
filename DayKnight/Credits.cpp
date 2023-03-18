@@ -27,13 +27,13 @@ void Credits::printTexts() {
 	texts = new Text[11];
 
 	texts[0].init(glm::vec2(float(272), float(100)), texProgram, 1, "DEVELOPED BY");
-	texts[1].init(glm::vec2(float(96), float(120)), texProgram, 2, "JUDITH ALMONO AND PAU CUESTA");
+	texts[1].init(glm::vec2(float(96), float(120)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
 
 	texts[2].init(glm::vec2(float(256), float(160)), texProgram, 1, "MAPS DESIGNED BY");
-	texts[3].init(glm::vec2(float(96), float(180)), texProgram, 2, "JUDITH ALMONO AND PAU CUESTA");
+	texts[3].init(glm::vec2(float(96), float(180)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
 
 	texts[4].init(glm::vec2(float(212), float(210)), texProgram, 1, "CHARACTERS MODIFICATIONS BY");
-	texts[5].init(glm::vec2(float(96), float(230)), texProgram, 2, "JUDITH ALMONO AND PAU CUESTA");
+	texts[5].init(glm::vec2(float(96), float(230)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH ");
 
 	texts[6].init(glm::vec2(float(176), float(270)), texProgram, 1,"ORIGINAL TILESHEET AND SPRITESHEETS FROM");
 	texts[7].init(glm::vec2(float(152), float(290)), texProgram, 2,"THE SPRITERS RESOURCE");

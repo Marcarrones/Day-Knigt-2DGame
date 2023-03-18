@@ -15,6 +15,7 @@ void Game::init()
 	glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 	scene.init();
 	mainMenu.init();
+	credit.init();
 }
 
 bool Game::update(int deltaTime)
@@ -26,6 +27,9 @@ bool Game::update(int deltaTime)
 		break;
 	case GAME:
 		scene.update(deltaTime);
+		break;
+	case CREDITS:
+		credit.update(deltaTime);
 		break;
 	}
 	
@@ -44,6 +48,9 @@ void Game::render()
 	case GAME:
 		scene.render();
 		break;
+	case CREDITS:
+		credit.render();
+		break;
 	}
 	
 }
@@ -57,7 +64,8 @@ void Game::keyPressed(int key)
 		currentScreen = MAIN_MENU;
 	if (key == 103)
 		currentScreen = GAME;
-
+	if (key == 99)
+		currentScreen = CREDITS;
 	std::cout << key << endl;
 	keys[key] = true;
 }
