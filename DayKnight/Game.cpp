@@ -93,8 +93,26 @@ void Game::mousePress(int button)
 {
 }
 
-void Game::mouseRelease(int button)
+void Game::mouseRelease(int button,int x, int y)
 {
+	if (currentScreen == MAIN_MENU) {
+		if (x >= 288 && x < 352 && y >= 160 && y < 176) {
+
+			currentScreen = GAME;
+	
+		}
+		if (x >= 224 && x < 416 && y >= 224 && y < 240) {
+	
+			currentScreen = INSTRUCTIONS;
+		}
+		if (x >= 264 && x < 376 && y >= 288 && y < 304) {
+
+			currentScreen = CREDITS;
+		}
+		if (x >= 288 && x < 352 && y >= 352 && y < 368) {
+			bPlay = false;
+		}
+	}
 }
 
 bool Game::getKey(int key) const

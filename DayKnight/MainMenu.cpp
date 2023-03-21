@@ -78,7 +78,7 @@ void MainMenu::initSpriteBackground() {
 }
 
 void MainMenu::initSpriteLogo() {
-	spritesheetLogo.loadFromFile("images/logo_goonies.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheetLogo.loadFromFile("images/logo.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	logo = new Sprite();
 	logo = Sprite::createSprite(glm::ivec2(140, 40), glm::vec2(1.0, 1.0), &spritesheetLogo, &texProgram);
 	logo->setNumberAnimations(1);
