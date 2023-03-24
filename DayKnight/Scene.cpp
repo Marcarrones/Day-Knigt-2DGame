@@ -4,10 +4,12 @@
 #include "Scene.h"
 #include "Game.h"
 
+// HACER GLOBALES?
+//#define SCREEN_X 32
+//#define SCREEN_Y 16
 
-#define SCREEN_X 32
-#define SCREEN_Y 16
 
+// LEER POS DE level.txt
 #define INIT_PLAYER_X_TILES 4
 #define INIT_PLAYER_Y_TILES 25
 
@@ -37,12 +39,18 @@ void Scene::init()
 	player->setTileMap(map);
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
+
+	enemy = new Enemy1();
+	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	enemy->setPosition(glm::vec2(100, 50));
+	
 }
 
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
+	if (player->collider.CheckColission(enemy->collider)) printf("COLISION!");
 }
 
 void Scene::render()
@@ -57,6 +65,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	map->render();
 	player->render();
+	enemy->render();
 }
 
 void Scene::initShaders()

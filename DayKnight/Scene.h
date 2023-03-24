@@ -6,6 +6,10 @@
 #include "ShaderProgram.h"
 #include "TileMap.h"
 #include "Player.h"
+#include "Enemy1.h"
+
+#define SCREEN_X 32
+#define SCREEN_Y 16
 
 
 // Scene contains all the entities of our game.
@@ -32,6 +36,8 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+
+	Enemy1 *enemy;
 
 };
 
