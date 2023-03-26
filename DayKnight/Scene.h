@@ -23,6 +23,9 @@ public:
 	void update(int deltaTime);
 	void render();
 
+	void changescreen(int screen);
+	void changelevel(int level);
+
 private:
 	void initShaders();
 
@@ -32,7 +35,7 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
-
+	int level, screen;
 };
 
 
