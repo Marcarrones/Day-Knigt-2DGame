@@ -80,14 +80,14 @@ void MainMenu::initSpriteBackground() {
 void MainMenu::initSpriteLogo() {
 	spritesheetLogo.loadFromFile("images/logo.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	logo = new Sprite();
-	logo = Sprite::createSprite(glm::ivec2(140, 40), glm::vec2(1.0, 1.0), &spritesheetLogo, &texProgram);
+	logo = Sprite::createSprite(glm::ivec2(140, 80), glm::vec2(1.0, 1.0), &spritesheetLogo, &texProgram);
 	logo->setNumberAnimations(1);
 
 	logo->setAnimationSpeed(0, 8);
 	logo->addKeyframe(0, glm::vec2(0.f, 0.f));
 
 	logo->changeAnimation(0);
-	logo->setPosition(glm::vec2(180, 64));
+	logo->setPosition(glm::vec2(250, 64));
 	logo->setScale(glm::vec3(2.0f, 2.0f, 0.f));
 }
 

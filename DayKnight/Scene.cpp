@@ -39,7 +39,7 @@ void Scene::init()
 		screen = 1;
 	}
 
-
+	initSpriteBackground();
 	enemy = new Enemy1();
 	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	enemy->setPosition(glm::vec2(100, 50));
@@ -49,6 +49,7 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	player->update(deltaTime);
+	background->update(deltaTime);
 
 	if (Game::instance().getKey(49)) {
 		changelevel(1);
@@ -95,6 +96,7 @@ void Scene::render()
 	modelview = glm::mat4(1.0f);
 	texProgram.setUniformMatrix4f("modelview", modelview);
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
+	background->render();
 	map->render();
 	player->render();
 	enemy->render();
@@ -128,6 +130,20 @@ void Scene::initShaders()
 	texProgram.bindFragmentOutput("outColor");
 	vShader.free();
 	fShader.free();
+}
+
+void Scene::initSpriteBackground()
+{
+	spritesheetBackground.loadFromFile("images/level_background.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	background = new Sprite();
+	background = Sprite::createSprite(glm::ivec2(640, 480), glm::vec2(1.0, 1.0), &spritesheetBackground, &texProgram);
+	background->setNumberAnimations(1);
+
+	background->setAnimationSpeed(0, 8);
+	background->addKeyframe(0, glm::vec2(0.f, 0.f));
+
+	background->changeAnimation(0);
+	background->setPosition(glm::vec2(0, 0));
 }
 
 
