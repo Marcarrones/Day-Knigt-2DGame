@@ -32,6 +32,7 @@ public:
 
 private:
 	void initShaders();
+	void initSpriteBackground();
 
 private:
 	TileMap *map;
@@ -40,7 +41,8 @@ private:
 	float currentTime;
 	glm::mat4 projection;
 	int level, screen;
-
+	Texture spritesheetBackground;
+	Sprite *background;
 	Enemy1 *enemy;
 };
 
