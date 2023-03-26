@@ -37,6 +37,18 @@
     <ClCompile Include="Credits.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="CollisionBox.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy1.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Position.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimKeyframes.h">
@@ -75,13 +87,25 @@
     <ClInclude Include="Credits.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="Position.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionBox.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy1.h">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{caeaeae0-8f6a-4680-a433-68cb3604883d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="headers">
       <UniqueIdentifier>{8b838d58-fbf1-4ffa-8ac9-0dac5420d3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{caeaeae0-8f6a-4680-a433-68cb3604883d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

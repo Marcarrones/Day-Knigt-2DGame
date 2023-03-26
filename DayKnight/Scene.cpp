@@ -39,6 +39,10 @@ void Scene::init()
 		screen = 1;
 	}
 
+
+	enemy = new Enemy1();
+	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	enemy->setPosition(glm::vec2(100, 50));
 }
 
 void Scene::update(int deltaTime)
@@ -60,6 +64,8 @@ void Scene::update(int deltaTime)
 	if (Game::instance().getKey(52)) {
 		map = NULL;
 	}
+
+	if (player->collider.CheckColission(enemy->collider)) printf("COLISION!");
 }
 
 void Scene::changescreen(int screen) {
@@ -91,6 +97,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	map->render();
 	player->render();
+	enemy->render();
 }
 
 void Scene::initShaders()
