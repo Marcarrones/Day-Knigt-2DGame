@@ -36,6 +36,9 @@ public:
 
 	void render();
 
+	int getHeight() { return _height; }
+	int getWidth() { return _height; }
+
 	bool CheckColission(CollisionBox other);
 	Rectangle getRectangle();
 
