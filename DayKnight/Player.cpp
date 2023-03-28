@@ -89,6 +89,7 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_RIGHT);
 	}
 
+
 	if (bJumping)
 	{
 		angle += deltaTime;
@@ -122,6 +123,7 @@ void Player::update(int deltaTime)
 		}
 	}
 	//position->SetPos(posPlayer.x, posPlayer.y);
+	paintTiles();
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 	sprite->setAngle(lookingRight * (angle / 120));
 }
@@ -129,13 +131,8 @@ void Player::update(int deltaTime)
 void Player::render()
 {
 	Entity::render();
-	sprite->render();
 }
 
-void Player::setTileMap(TileMap *tileMap)
-{
-	map = tileMap;
-}
 
 void Player::setPosition(const glm::vec2 &pos)
 {
@@ -144,5 +141,9 @@ void Player::setPosition(const glm::vec2 &pos)
 }
 
 
+void Player::paintTiles() {
+	map->paintBottomTile(posEntity, glm::ivec2(collider.getWidth(), collider.getHeight()));
+	//map->paintBottomTile(posEntity, glm::ivec2(collider.getWidth(), collider.getHeight()), 2, 4);
 
+}
 
