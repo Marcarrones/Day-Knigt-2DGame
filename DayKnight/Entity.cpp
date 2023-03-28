@@ -20,11 +20,13 @@ void Entity::update(int deltaTime)
 
 void Entity::render()
 {
+	sprite->render();
 	collider.render();
 }
 
 void Entity::setTileMap(TileMap * tileMap)
 {
+	map = tileMap;
 }
 
 void Entity::setPosition(const glm::vec2 & pos)
