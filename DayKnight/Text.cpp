@@ -180,7 +180,7 @@ void Text::render()
 }
 
 void Text::setText(string newText) {
-	for (int i = 0; i < newText.size(); ++i) {
+	for (unsigned int i = 0; i < newText.size(); ++i) {
 		int character = (int)newText.at(i);
 		if (character == 33) sprite[i].changeAnimation(EXCLAMATION_MARK);
 		else if (character == 63) sprite[i].changeAnimation(QUESTION_MARK);
