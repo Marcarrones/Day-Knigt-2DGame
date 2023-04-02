@@ -59,7 +59,7 @@ private:
 	// Indica que tiles [0].first y [1].first se deberian pintar 
 	// y a que nuevas tiles [0].second y [1].second respectivamente
 	// Evitar que se el primero y el segundo sean los mismos (ej de que no hacer: (1,2) (2,4) -> Pinta dos veces
-	pair<int, int> tilePainting[2] = { pair<int,int>(1,2), pair<int,int > (3,4) };
+	pair<int, int> tilePainting[2] = { pair<int,int>(2,1), pair<int,int > (5,4) };
 
 	glm::vec2 oldMinCoords;
 	ShaderProgram oldShader;
