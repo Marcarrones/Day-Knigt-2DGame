@@ -17,6 +17,7 @@ Scene::Scene()
 {
 	map = NULL;
 	player = NULL;
+	menuSuperior = NULL;
 }
 
 Scene::~Scene()
@@ -33,6 +34,8 @@ void Scene::init()
 	initShaders();
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
+	menuSuperior = new MenuSuperior();
+	menuSuperior->init(glm::ivec2(SCREEN_X+16, SCREEN_Y+32), texProgram);
 	screen = 0;
 	if (screen == 0) {
 		changescreen(0);
@@ -50,7 +53,8 @@ void Scene::update(int deltaTime)
 	currentTime += deltaTime;
 	player->update(deltaTime);
 	background->update(deltaTime);
-
+	menuSuperior->update(deltaTime);
+	menuSuperior->updateTime(currentTime/1000);
 	if (Game::instance().getKey(49)) {
 		changelevel(1);
 	}
@@ -106,6 +110,7 @@ void Scene::render()
 	texProgram.setUniform2f("texCoordDispl", 0.f, 0.f);
 	background->render();
 	map->render();
+	menuSuperior->render();
 	player->render();
 	enemy->render();
 }

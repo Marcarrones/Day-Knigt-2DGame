@@ -26,20 +26,20 @@ void Credits::init() {
 void Credits::printTexts() {
 	texts = new Text[11];
 
-	texts[0].init(glm::vec2(float(272), float(100)), texProgram, 1, "DEVELOPED BY");
+	texts[0].init(glm::vec2(float(96), float(100)), texProgram, 2, "DEVELOPED BY");
 	texts[1].init(glm::vec2(float(96), float(120)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
 
-	texts[2].init(glm::vec2(float(256), float(160)), texProgram, 1, "MAPS DESIGNED BY");
+	texts[2].init(glm::vec2(float(96), float(160)), texProgram, 2, "MAPS DESIGNED BY");
 	texts[3].init(glm::vec2(float(96), float(180)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
 
-	texts[4].init(glm::vec2(float(212), float(210)), texProgram, 1, "CHARACTERS MODIFICATIONS BY");
+	texts[4].init(glm::vec2(float(96), float(210)), texProgram, 2, "CHARACTERS MODIFICATIONS BY");
 	texts[5].init(glm::vec2(float(96), float(230)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH ");
 
-	texts[6].init(glm::vec2(float(176), float(270)), texProgram, 1,"ORIGINAL TILESHEET AND SPRITESHEETS FROM");
-	texts[7].init(glm::vec2(float(152), float(290)), texProgram, 2,"THE SPRITERS RESOURCE");
+	texts[6].init(glm::vec2(float(96), float(270)), texProgram, 2,"ORIGINAL TILESHEETS");
+	texts[7].init(glm::vec2(float(96), float(290)), texProgram, 2,"THE SPRITERS RESOURCE");
 
-	texts[8].init(glm::vec2(float(288), float(330)), texProgram, 1, "MUSIC BY");
-	texts[9].init(glm::vec2(float(216), float(350)), texProgram, 2, "WWW.VGMPF.COM");
+	texts[8].init(glm::vec2(float(96), float(330)), texProgram, 2, "MUSIC BY");
+	texts[9].init(glm::vec2(float(96), float(350)), texProgram, 2, "WWW.VGMPF.COM");
 
 	texts[10].init(glm::vec2(float(136), float(450)), texProgram, 2, "PRESS ESC TO GO TO MENU");
 }
@@ -67,7 +67,7 @@ void Credits::render() {
 }
 
 void Credits::initSpriteBackground() {
-	spritesheetBackground.loadFromFile("images/creditos.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheetBackground.loadFromFile("images/menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	background = new Sprite();
 	background = Sprite::createSprite(glm::ivec2(640, 480), glm::vec2(1.0, 1.0), &spritesheetBackground, &texProgram);
 	background->setNumberAnimations(1);
