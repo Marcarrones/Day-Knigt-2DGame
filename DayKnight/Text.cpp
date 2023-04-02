@@ -33,7 +33,7 @@ void Text::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, int 
 
 void Text::initSprites(int size) {
 	for (int i = 0; i < sizeText; ++i) {
-		sprite[i] = *Sprite::createSprite(glm::ivec2(8, 8), glm::vec2(0.03125, 0.5), &spritesheet, &shader);
+		sprite[i] = *Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(0.03125, 0.5), &spritesheet, &shader);
 		sprite[i].setNumberAnimations(41);
 
 		/* NUMEROS */
