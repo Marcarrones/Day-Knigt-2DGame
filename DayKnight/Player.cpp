@@ -22,7 +22,8 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	Entity::init(tileMapPos, shaderProgram);
 	bJumping = false;
 	angle = 0.f;
-
+	live = 3;
+	immune = false;
 	initSprite(shaderProgram);
 	
 }
@@ -138,6 +139,26 @@ void Player::setPosition(const glm::vec2 &pos)
 {
 	posEntity = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
+}
+
+int Player::getlive()
+{
+	return this->live;
+}
+
+void Player::changelive(int live)
+{
+	this->live = live;
+}
+
+bool Player::isImmune()
+{
+	return this->immune;
+}
+
+void Player::changeImmune()
+{
+	this->immune = !this->immune;
 }
 
 

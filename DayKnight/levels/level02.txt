@@ -1,7 +1,7 @@
 TILEMAP
 36 28 							-- Size of tile map in tiles
 16 32 							-- Tile size & block size
-images/level2.png 	-- Tilesheet
+images/tile_suelo.png 	-- Tilesheet
 2 2 								-- Number of tiles in tilesheet
 121212121212121212121212121212121212
 12                                12

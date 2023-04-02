@@ -20,6 +20,10 @@ public:
 	
 	//void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
+	int getlive();
+	void changelive(int live);
+	bool isImmune();
+	void changeImmune();
 	
 private:
 	bool bJumping;
@@ -31,6 +35,8 @@ private:
 	//TileMap *map;
 	void initSprite(ShaderProgram &shaderProgram);
 	void paintTiles();
+	int live;
+	bool immune;
 };
 
 
