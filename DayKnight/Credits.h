@@ -21,7 +21,6 @@ private:
 	void initShaders();
 	void printTexts();
 	void initSpriteBackground();
-	void initSpriteLogo();
 
 private:
 	ShaderProgram texProgram;
