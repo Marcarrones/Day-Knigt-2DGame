@@ -164,7 +164,5 @@ void Player::changeImmune()
 
 void Player::paintTiles() {
 	map->paintBottomTile(posEntity, glm::ivec2(collider.getWidth(), collider.getHeight()));
-	//map->paintBottomTile(posEntity, glm::ivec2(collider.getWidth(), collider.getHeight()), 2, 4);
-
 }
 
