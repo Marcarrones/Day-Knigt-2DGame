@@ -9,8 +9,8 @@
 // #define SCREEN_X 32
 // #define SCREEN_Y 16
 
-#define INIT_PLAYER_X_TILES 4
-#define INIT_PLAYER_Y_TILES 25
+#define INIT_PLAYER_X_TILES 60
+#define INIT_PLAYER_Y_TILES 288
 
 
 Scene::Scene()
@@ -36,16 +36,48 @@ void Scene::init()
 	currentTime = 0.0f;
 	menuSuperior = new MenuSuperior();
 	menuSuperior->init(glm::ivec2(SCREEN_X+16, SCREEN_Y+32), texProgram);
-	screen = 0;
-	if (screen == 0) {
-		changescreen(0);
-		screen = 1;
-	}
+	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	level = 1;
+	player = new Player();
+	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES, INIT_PLAYER_Y_TILES));
+	player->setTileMap(map);
+	playerPoints = 0;
+	menuSuperior->changeLive(player->getlive());
 
 	initSpriteBackground();
 	enemy = new Enemy1();
 	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	enemy->setPosition(glm::vec2(100, 50));
+}
+
+
+void Scene::restar()
+{
+	currentTime = 0.0f;
+	menuSuperior = new MenuSuperior();
+	menuSuperior->init(glm::ivec2(SCREEN_X + 16, SCREEN_Y + 32), texProgram);
+	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	player = new Player();
+	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES, INIT_PLAYER_Y_TILES));
+	player->setTileMap(map);
+	playerPoints = 0;
+	menuSuperior->changeLive(player->getlive());
+	enemy = new Enemy1();
+	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	enemy->setPosition(glm::vec2(100, 50));
+}
+
+void Scene::finishLevel(int level)
+{
+	if (level == 1){
+		changelevel(2);
+	}
+	else if (level == 2) {
+		changelevel(3);
+	}
+	
 }
 
 void Scene::update(int deltaTime)
@@ -55,20 +87,20 @@ void Scene::update(int deltaTime)
 	background->update(deltaTime);
 	menuSuperior->update(deltaTime);
 	menuSuperior->updateTime(currentTime/1000);
+	menuSuperior->setPoints(playerPoints);
 	if (Game::instance().getKey(49)) {
 		changelevel(1);
+		
 	}
 	if (Game::instance().getKey(50)) {
 		changelevel(2);
+		
 	}
 
 	if (Game::instance().getKey(51)) {
 		changelevel(3);
 	}
 
-	if (Game::instance().getKey(52)) {
-		map = NULL;
-	}
 
 	if (player->collider.CheckColission(enemy->collider)) printf("COLISION!");
 
@@ -79,24 +111,21 @@ void Scene::update(int deltaTime)
 
 }
 
-// TODO: Remove duped function
 
-void Scene::changescreen(int screen) {
-	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	player = new Player();
-	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
-	player->setTileMap(map);
-}
+
+
 
 void Scene::changelevel(int level)
 {
 	map = TileMap::createTileMap("levels/level0"+to_string(level)+".txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	player = new Player();
-	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+	//player = new Player();
+	//player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	menuSuperior->changeLevel(level);
+	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES , INIT_PLAYER_Y_TILES ));
 	player->setTileMap(map);
+	this->level = level;
 }
+
 
 void Scene::render()
 {

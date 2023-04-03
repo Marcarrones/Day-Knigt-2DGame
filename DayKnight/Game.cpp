@@ -57,8 +57,23 @@ void Game::render()
 
 void Game::keyPressed(int key)
 {
-	if(key == 27) // Escape code
-		bPlay = false;
+	if (key == 27) {// Escape code
+		switch (currentScreen)
+		{
+		case MAIN_MENU:
+			bPlay = false;
+			break;
+		case GAME:
+			currentScreen = MAIN_MENU;
+			break;
+		case CREDITS:
+			currentScreen = MAIN_MENU;
+			break;
+		case INSTRUCTIONS:
+			currentScreen = MAIN_MENU;
+			break;
+		}
+	}
 
 	if (key == 109)
 		currentScreen = MAIN_MENU;
@@ -66,6 +81,10 @@ void Game::keyPressed(int key)
 		currentScreen = GAME;
 	if (key == 99)
 		currentScreen = CREDITS;
+	if (key == 114 && currentScreen == GAME) {
+		scene.restar();
+	}
+	
 	std::cout << key << endl;
 	keys[key] = true;
 }
