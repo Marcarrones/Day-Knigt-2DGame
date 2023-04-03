@@ -28,7 +28,9 @@ public:
 	void update(int deltaTime);
 	void render();
 
-	void changescreen(int screen);
+	void renderEntities();
+
+	//void changescreen(int screen);
 	void changelevel(int level);
 
 private:
@@ -44,8 +46,11 @@ private:
 	int level, screen;
 	Texture spritesheetBackground;
 	Sprite *background;
-	Enemy1 *enemy;
+	//Enemy1 *enemy;
 	MenuSuperior* menuSuperior;
+
+	vector<Entity> entites;
+
 };
 
 

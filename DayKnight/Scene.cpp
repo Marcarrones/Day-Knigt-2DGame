@@ -38,14 +38,16 @@ void Scene::init()
 	menuSuperior->init(glm::ivec2(SCREEN_X+16, SCREEN_Y+32), texProgram);
 	screen = 0;
 	if (screen == 0) {
-		changescreen(0);
+		changelevel(1);
 		screen = 1;
 	}
 
 	initSpriteBackground();
+	/*
 	enemy = new Enemy1();
 	enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	enemy->setPosition(glm::vec2(100, 50));
+	*/
 }
 
 void Scene::update(int deltaTime)
@@ -70,7 +72,7 @@ void Scene::update(int deltaTime)
 		map = NULL;
 	}
 
-	if (player->collider.CheckColission(enemy->collider)) printf("COLISION!");
+	//if (player->collider.CheckColission(enemy->collider)) printf("COLISION!");
 
 	// Check if map cleared
 	if (map->remainingTiles() <= 0) {
@@ -80,7 +82,7 @@ void Scene::update(int deltaTime)
 }
 
 // TODO: Remove duped function
-
+/*
 void Scene::changescreen(int screen) {
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	player = new Player();
@@ -88,13 +90,14 @@ void Scene::changescreen(int screen) {
 	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
 	player->setTileMap(map);
 }
-
+*/
+// INIT LEVEL
 void Scene::changelevel(int level)
 {
 	map = TileMap::createTileMap("levels/level0"+to_string(level)+".txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	player = new Player();
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(INIT_PLAYER_X_TILES * map->getTileSize(), INIT_PLAYER_Y_TILES * map->getTileSize()));
+	player->setPosition(map->playerPos);
 	player->setTileMap(map);
 }
 
@@ -111,8 +114,14 @@ void Scene::render()
 	background->render();
 	map->render();
 	menuSuperior->render();
+	
+	renderEntities();
+	//enemy->render();
+}
+
+void Scene::renderEntities() {
 	player->render();
-	enemy->render();
+
 }
 
 void Scene::initShaders()
