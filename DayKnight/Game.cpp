@@ -82,7 +82,7 @@ void Game::keyPressed(int key)
 	if (key == 99)
 		currentScreen = CREDITS;
 	if (key == 114 && currentScreen == GAME) {
-		scene.restar();
+		scene.restart();
 	}
 	
 	std::cout << key << endl;

@@ -4,7 +4,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Game.h"
-
+/*
 Instructions::~Instructions()
 {
 }
@@ -80,3 +80,4 @@ void Instructions::initSpriteBackground()
 	background->changeAnimation(0);
 	background->setPosition(glm::vec2(0, 0));
 }
+*/
