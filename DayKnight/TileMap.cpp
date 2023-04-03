@@ -239,6 +239,11 @@ void TileMap::paintBottomTile(const glm::ivec2 &pos, const glm::ivec2 &size /*, 
 	reloadArrays();
 }
 
+int TileMap::getPaintedTiles()
+{
+	return paintedTiles;
+}
+
 bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) const
 {
 	int x, y0, y1;

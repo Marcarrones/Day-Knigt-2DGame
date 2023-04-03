@@ -90,7 +90,7 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_RIGHT);
 	}
 
-
+	
 	if (bJumping)
 	{
 		angle += deltaTime;
@@ -120,7 +120,7 @@ void Player::update(int deltaTime)
 				bJumping = true;
 				jumpAngle = 0;
 				startY = posEntity.y;
-			}
+			}	
 		}
 	}
 	//position->SetPos(posPlayer.x, posPlayer.y);

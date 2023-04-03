@@ -30,8 +30,10 @@ public:
 
 	void renderEntities();
 
-	//void changescreen(int screen);
+
 	void changelevel(int level);
+	void restart();
+	void finishLevel(int level);
 
 private:
 	void initShaders();
@@ -51,6 +53,7 @@ private:
 
 	vector<Entity> entites;
 
+	int playerPoints;
 };
 
 

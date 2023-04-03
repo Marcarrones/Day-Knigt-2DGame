@@ -39,6 +39,7 @@ public:
 	void paintBottomTile(const glm::ivec2 &pos, const glm::ivec2 &size);
 
 	int remainingTiles() { return paintableTiles - paintedTiles;  }
+	int getPaintedTiles();
 
 	glm::ivec2 playerPos, keyPos, exitPos;
 	std::stack<glm::ivec2> enemy1Pos, enemy2Pos, enemy3Pos, itemPos, stopwatchPos, gemPos;
