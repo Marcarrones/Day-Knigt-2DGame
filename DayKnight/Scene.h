@@ -7,6 +7,7 @@
 #include "TileMap.h"
 #include "Player.h"
 #include "Enemy1.h"
+#include "MenuSuperior.h"
 
 #define SCREEN_X 32
 #define SCREEN_Y 16
@@ -27,8 +28,16 @@ public:
 	void update(int deltaTime);
 	void render();
 
+	void renderEntities();
+
+
+	void changelevel(int level);
+	void restart();
+	void finishLevel(int level);
+
 private:
 	void initShaders();
+	void initSpriteBackground();
 
 private:
 	TileMap *map;
@@ -36,9 +45,15 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+	int level, screen;
+	Texture spritesheetBackground;
+	Sprite *background;
+	//Enemy1 *enemy;
+	MenuSuperior* menuSuperior;
 
-	Enemy1 *enemy;
+	vector<Entity> entites;
 
+	int playerPoints;
 };
 
 

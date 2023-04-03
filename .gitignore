@@ -1,7 +1,10 @@
 *.sdf
 *.opensdf
-*.vcxproj.filters
 */.vs
 */Debug
 */Release
-*.db
+*/*.VC.db
+*/*.VC.opendb
+/DayKnight/DayKnight.aps
+/DayKnight/DayKnight.rc
+*/*.user

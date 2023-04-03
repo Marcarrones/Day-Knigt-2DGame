@@ -10,7 +10,7 @@
 // all properties it needs to track its movement, jumping, and collisions.
 
 
-class Player: public Entity
+class Player:public Entity
 {
 
 public:
@@ -20,8 +20,12 @@ public:
 	void update(int deltaTime);
 	void render();
 	
-	void setTileMap(TileMap *tileMap);
+	//void setTileMap(TileMap *tileMap);
 	void setPosition(const glm::vec2 &pos);
+	int getlive();
+	void changelive(int live);
+	bool isImmune();
+	void changeImmune();
 	
 private:
 	bool bJumping;
@@ -31,9 +35,10 @@ private:
 	//Texture spritesheet;
 	//Sprite *sprite;
 	//TileMap *map;
-
 	void initSprite(ShaderProgram &shaderProgram);
-
+	void paintTiles();
+	int live;
+	bool immune;
 };
 
 

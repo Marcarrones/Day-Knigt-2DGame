@@ -24,8 +24,10 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	Entity::init(tileMapPos, shaderProgram);
 	bJumping = false;
 	angle = 0.f;
+	live = 3;
+	immune = false;
+	initSprite(shaderProgram);
 	
-	initSprite(shaderProgram);	
 }
 
 void Player::initSprite(ShaderProgram &shaderProgram)
@@ -59,10 +61,10 @@ void Player::update(int deltaTime)
 	int lookingRight = 1;
 	if (sprite->animation() == MOVE_LEFT || sprite->animation() == STAND_LEFT) lookingRight = -1;
 	sprite->update(deltaTime);
-	if(Game::instance().getSpecialKey(GLUT_KEY_LEFT))
+	if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
 
-		if(sprite->animation() != MOVE_LEFT)
+		if (sprite->animation() != MOVE_LEFT)
 			sprite->changeAnimation(MOVE_LEFT);
 		posEntity.x -= 2;
 		if(map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)))
@@ -71,9 +73,9 @@ void Player::update(int deltaTime)
 			sprite->changeAnimation(STAND_LEFT);
 		}
 	}
-	else if(Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
+	else if (Game::instance().getSpecialKey(GLUT_KEY_RIGHT))
 	{
-		if(sprite->animation() != MOVE_RIGHT)
+		if (sprite->animation() != MOVE_RIGHT)
 			sprite->changeAnimation(MOVE_RIGHT);
 		posEntity.x += 2;
 		if(map->collisionMoveRight(posEntity, glm::ivec2(32, 32)))
@@ -84,18 +86,19 @@ void Player::update(int deltaTime)
 	}
 	else
 	{
-		if(sprite->animation() == MOVE_LEFT)
+		if (sprite->animation() == MOVE_LEFT)
 			sprite->changeAnimation(STAND_LEFT);
-		else if(sprite->animation() == MOVE_RIGHT)
+		else if (sprite->animation() == MOVE_RIGHT)
 			sprite->changeAnimation(STAND_RIGHT);
 	}
+
 	
-	if(bJumping)
+	if (bJumping)
 	{
 		angle += deltaTime;
 
 		jumpAngle += JUMP_ANGLE_STEP;
-		if(jumpAngle == 180)
+		if (jumpAngle == 180)
 		{
 			bJumping = false;
 			posEntity.y = startY;
@@ -114,7 +117,7 @@ void Player::update(int deltaTime)
 		if(map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y))
 		{
 			angle = 0;
-			if(Game::instance().getSpecialKey(GLUT_KEY_UP))
+			if (Game::instance().getSpecialKey(GLUT_KEY_UP))
 			{
 				bJumping = true;
 				jumpAngle = 0;
@@ -123,20 +126,16 @@ void Player::update(int deltaTime)
 		}
 	}
 	//position->SetPos(posPlayer.x, posPlayer.y);
+	paintTiles();
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
-	sprite->setAngle(lookingRight * (angle/120) );
+	sprite->setAngle(lookingRight * (angle / 120));
 }
 
 void Player::render()
 {
 	Entity::render();
-	sprite->render();
 }
 
-void Player::setTileMap(TileMap *tileMap)
-{
-	map = tileMap;
-}
 
 void Player::setPosition(const glm::vec2 &pos)
 {
@@ -144,8 +143,28 @@ void Player::setPosition(const glm::vec2 &pos)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
 
+int Player::getlive()
+{
+	return this->live;
+}
+
+void Player::changelive(int live)
+{
+	this->live = live;
+}
+
+bool Player::isImmune()
+{
+	return this->immune;
+}
+
+void Player::changeImmune()
+{
+	this->immune = !this->immune;
+}
 
 
-
-
+void Player::paintTiles() {
+	map->paintBottomTile(posEntity, glm::ivec2(collider.getWidth(), collider.getHeight()));
+}
 

@@ -3,7 +3,9 @@
 
 
 #include "Scene.h"
-
+#include "MainMenu.h"
+#include "Credits.h"
+//#include "Instructions.h"
 
 #define SCREEN_WIDTH 640
 #define SCREEN_HEIGHT 480
@@ -37,7 +39,7 @@ public:
 	void specialKeyReleased(int key);
 	void mouseMove(int x, int y);
 	void mousePress(int button);
-	void mouseRelease(int button);
+	void mouseRelease(int button, int x,int y);
 	
 	bool getKey(int key) const;
 	bool getSpecialKey(int key) const;
@@ -45,9 +47,12 @@ public:
 private:
 	bool bPlay;                       // Continue to play game?
 	Scene scene;                      // Scene to render
+	MainMenu mainMenu;
+	Credits credit; 
+	//Instructions instructions;
 	bool keys[256], specialKeys[256]; // Store key states so that 
 	                                  // we can have access at any time
-
+	int currentScreen;
 };
 
 

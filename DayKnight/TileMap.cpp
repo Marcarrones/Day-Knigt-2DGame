@@ -7,6 +7,10 @@
 
 using namespace std;
 
+int PAINTABLE_TILE = 1;
+int PAINTED_TILE = 2;
+
+
 
 TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
@@ -18,6 +22,7 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
+	paintedTiles = 0;
 	loadLevel(levelFile);
 	prepareArrays(minCoords, program);
 }
@@ -76,30 +81,85 @@ bool TileMap::loadLevel(const string &levelFile)
 	sstream.str(line);
 	sstream >> tilesheetSize.x >> tilesheetSize.y;
 	tileTexSize = glm::vec2(1.f / tilesheetSize.x, 1.f / tilesheetSize.y);
-	
+	/*
+	sstram >> tilePainting[0].first >> tilePainting[0].second;
+	sstram >> tilePainting[1].first >> tilePainting[1].second;
+	*/
 	map = new int[mapSize.x * mapSize.y];
+	paintableTiles = 0;
 	for(int j=0; j<mapSize.y; j++)
 	{
 		for(int i=0; i<mapSize.x; i++)
 		{
+			glm::ivec2 entityPos = glm::ivec2(i * tileSize, (j - 1) * tileSize);
 			fin.get(tile);
-			if(tile == ' ')
-				map[j*mapSize.x+i] = 0;
-			else
-				map[j*mapSize.x+i] = tile - int('0');
+			if (tile - int('0') < 10 && tile-int('0') >= 0) {
+				int tileNumber = tile - int('0');
+				map[j*mapSize.x + i] = tileNumber;
+				// COUNT TILES
+				if (tileNumber == tilePainting[0].first || tileNumber == tilePainting[1].first)
+					if (j != 0 && map[(j - 1)*mapSize.x + i] == 0) paintableTiles++;
+			}
+			else {
+				map[j*mapSize.x + i] = 0;
+				setPositions(tile, entityPos);
+			}
 		}
 		fin.get(tile);
 #ifndef _WIN32
 		fin.get(tile);
 #endif
 	}
+
 	fin.close();
 	
 	return true;
 }
 
+void TileMap::setPositions(char tile, glm::ivec2 entityPos) {
+	switch (tile)
+	{
+	default: return;
+	case 'p':	// PLAYER
+		playerPos = entityPos;
+		break;
+	case 'k':	// KEY
+		keyPos = entityPos;
+		break;
+	case 'd':	// EXIT DOOR
+		exitPos = entityPos;
+		break;
+		
+		//ITEMS
+	case 'i':
+		itemPos.push(entityPos);
+		break;
+	case 'w':
+		stopwatchPos.push(entityPos);
+		break;
+	case 'g':
+		gemPos.push(entityPos);
+		break;
+
+		//ENEMIES
+	case 'e':
+		enemy1Pos.push(entityPos);
+		break;
+	case 'r':
+		enemy2Pos.push(entityPos);
+		break;
+	case 't':
+		enemy3Pos.push(entityPos);
+		break;
+	}
+	return;
+}
+
 void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 {
+	oldShader = program;
+	oldMinCoords = minCoords;
+
 	int tile;
 	glm::vec2 posTile, texCoordTile[2], halfTexel;
 	vector<float> vertices;
@@ -150,6 +210,39 @@ void TileMap::prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program)
 // Collision tests for axis aligned bounding boxes.
 // Method collisionMoveDown also corrects Y coordinate if the box is
 // already intersecting a tile below.
+
+void TileMap::paintBottomTile(const glm::ivec2 &pos, const glm::ivec2 &size /*, int paintableTileInt, int paintedTileInt */) {
+	int x0, x1, y;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y = (pos.y + size.y - 2) / tileSize;
+
+	for (int x = x0; x <= x1; x++)
+	{
+		int valuePre = map[(y + 1)*mapSize.x + x];
+		bool isPaintable = (valuePre == tilePainting[0].first|| valuePre == tilePainting[1].first);
+
+		if (map[(y + 1)*mapSize.x + x] == tilePainting[0].first) {
+			paintedTiles++;
+			map[(y + 1)*mapSize.x + x] = tilePainting[0].second;
+		}
+		else if (map[(y + 1)*mapSize.x + x] == tilePainting[1].first) {
+			paintedTiles++;
+			map[(y + 1)*mapSize.x + x] = tilePainting[1].second;
+		}
+		int valuePost = map[(y + 1)*mapSize.x + x];
+		if (isPaintable) {
+
+		}	
+	}
+	reloadArrays();
+}
+
+int TileMap::getPaintedTiles()
+{
+	return paintedTiles;
+}
 
 bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) const
 {
@@ -206,31 +299,6 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+void TileMap::reloadArrays() {
+	prepareArrays(oldMinCoords, oldShader);
+}
