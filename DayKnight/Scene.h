@@ -28,8 +28,9 @@ public:
 	void update(int deltaTime);
 	void render();
 
-	void changescreen(int screen);
 	void changelevel(int level);
+	void restar();
+	void finishLevel(int level);
 
 private:
 	void initShaders();
@@ -46,6 +47,7 @@ private:
 	Sprite *background;
 	Enemy1 *enemy;
 	MenuSuperior* menuSuperior;
+	int playerPoints;
 };
 
 
