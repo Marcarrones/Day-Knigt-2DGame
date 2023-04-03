@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include "Texture.h"
 #include "ShaderProgram.h"
+#include <stack>
 
 
 // Class Tilemap is capable of loading a tile map from a text file in a very
@@ -39,10 +40,14 @@ public:
 
 	int remainingTiles() { return paintableTiles - paintedTiles;  }
 
+	glm::ivec2 playerPos, keyPos, exitPos;
+	std::stack<glm::ivec2> enemy1Pos, enemy2Pos, enemy3Pos, itemPos, stopwatchPos, gemPos;
+
 private:
 	bool loadLevel(const string &levelFile);
-	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
+	void setPositions(char tile, glm::ivec2 entityPos);
 
+	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
 	void reloadArrays();
 
 private:
