@@ -125,16 +125,14 @@ void Scene::changelevel(Level newLevel)
 {
 	level = newLevel;
 	currentTime = 0.0f;
-	
 	map = TileMap::createTileMap("levels/" + levelTxt(newLevel) + ".txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
+	
 	initEntities();
 
 	menuSuperior = new MenuSuperior();
 
 	menuSuperior->init(glm::ivec2(SCREEN_X + 16, SCREEN_Y + 32), texProgram);
 	menuSuperior->changeLive(player->getlive());
-
-	//initSpriteBackground();
 }
 
 #pragma region RENDER
@@ -187,15 +185,12 @@ void Scene::initEntities() {
 	// Enemy 1
 
 	positions = map->enemy1Pos;
-	int i = positions.size();
-	while (!positions.empty()) {
-		//glm::ivec2 tilemapPos = positions.top();
+	while(!positions.empty()) {
 		Enemy1* n = new Enemy1();
+
 		n->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		n->setPosition(positions.top());
-
-		glm::ivec2* pos = n->getPos();
-		i--;
+		n->setTileMap(map);
 
 		entites.push_back(n);
 		positions.pop();
