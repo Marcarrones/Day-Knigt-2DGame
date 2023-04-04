@@ -16,6 +16,7 @@ void Game::init()
 	scene.init();
 	mainMenu.init();
 	credit.init();
+	instructions.init();
 }
 
 bool Game::update(int deltaTime)
@@ -30,6 +31,9 @@ bool Game::update(int deltaTime)
 		break;
 	case CREDITS:
 		credit.update(deltaTime);
+		break;
+	case INSTRUCTIONS:
+		instructions.update(deltaTime);
 		break;
 	}
 	
@@ -50,6 +54,9 @@ void Game::render()
 		break;
 	case CREDITS:
 		credit.render();
+		break;
+	case INSTRUCTIONS:
+		instructions.render();
 		break;
 	}
 	
@@ -84,6 +91,8 @@ void Game::keyPressed(int key)
 	if (key == 114 && currentScreen == GAME) {
 		scene.restart();
 	}
+	if (key == 105)
+		currentScreen = INSTRUCTIONS;
 	
 	std::cout << key << endl;
 	keys[key] = true;

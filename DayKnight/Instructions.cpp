@@ -4,18 +4,17 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Game.h"
-/*
+
 Instructions::~Instructions()
 {
 }
 
-void Instructions::init(glm::ivec2 pos, ShaderProgram & shaderProgram)
+void Instructions::init()
 {
 	initShaders();
 	currentTime = 0.0f;
 	initSpriteBackground();
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
-	currentTime = 0.0f;
 }
 
 void Instructions::update(int deltaTime)
@@ -69,7 +68,7 @@ void Instructions::initShaders()
 
 void Instructions::initSpriteBackground()
 {
-	spritesheetBackground.loadFromFile("images/menu.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheetBackground.loadFromFile("images/Instrucciones.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	background = new Sprite();
 	background = Sprite::createSprite(glm::ivec2(640, 480), glm::vec2(1.0, 1.0), &spritesheetBackground, &texProgram);
 	background->setNumberAnimations(1);
@@ -80,4 +79,3 @@ void Instructions::initSpriteBackground()
 	background->changeAnimation(0);
 	background->setPosition(glm::vec2(0, 0));
 }
-*/
