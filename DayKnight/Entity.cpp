@@ -24,6 +24,10 @@ void Entity::render()
 	collider.render();
 }
 
+bool Entity::CheckCollision(Entity other) {
+	return collider.CheckColission(other.collider);
+}
+
 void Entity::setTileMap(TileMap * tileMap)
 {
 	map = tileMap;
@@ -31,4 +35,6 @@ void Entity::setTileMap(TileMap * tileMap)
 
 void Entity::setPosition(const glm::vec2 & pos)
 {
+	posEntity = pos;
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }

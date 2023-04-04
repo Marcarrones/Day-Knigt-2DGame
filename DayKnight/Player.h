@@ -5,25 +5,33 @@
 #include "Sprite.h"
 #include "TileMap.h"
 #include "Entity.h"
+#include "Enemy1.h"
 
 // Player is basically a Sprite that represents the player. As such it has
 // all properties it needs to track its movement, jumping, and collisions.
 
 
-class Player:public Entity
+class Player : public Entity
 {
 
 public:
+	Player();
+
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update(int deltaTime);
 	void render();
-	
+
+	bool CheckCollision(Entity entity);
+
 	//void setTileMap(TileMap *tileMap);
-	void setPosition(const glm::vec2 &pos);
+	//void setPosition(const glm::vec2 &pos);
 	int getlive();
 	void changelive(int live);
 	bool isImmune();
 	void changeImmune();
+
+
+	int playerSpeed = 2;
 	
 private:
 	bool bJumping;

@@ -26,13 +26,13 @@ void MainMenu::init() {
 
 void MainMenu::printTextsActions() {
 	textPlay = new Text();
-	textPlay->init(glm::vec2(float(288), float(160)), texProgram, 2, "PLAY");
+	textPlay->init(glm::vec2(float(288), float(160)), texProgram, 1, "PLAY");
 	textInstructions = new Text();
-	textInstructions->init(glm::vec2(float(224), float(224)), texProgram, 2, "INSTRUCTIONS");
+	textInstructions->init(glm::vec2(float(224), float(224)), texProgram, 1, "INSTRUCTIONS");
 	textCredits = new Text();
-	textCredits->init(glm::vec2(float(264), float(288)), texProgram, 2, "CREDITS");
+	textCredits->init(glm::vec2(float(264), float(288)), texProgram, 1, "CREDITS");
 	textExit = new Text();
-	textExit->init(glm::vec2(float(288), float(352)), texProgram, 2, "EXIT");
+	textExit->init(glm::vec2(float(288), float(352)), texProgram, 1, "EXIT");
 }
 
 
@@ -80,31 +80,31 @@ void MainMenu::initSpriteBackground() {
 void MainMenu::initSpriteLogo() {
 	spritesheetLogo.loadFromFile("images/logo.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	logo = new Sprite();
-	logo = Sprite::createSprite(glm::ivec2(140, 80), glm::vec2(1.0, 1.0), &spritesheetLogo, &texProgram);
+	logo = Sprite::createSprite(glm::ivec2(446, 65), glm::vec2(1.0, 1.0), &spritesheetLogo, &texProgram);
 	logo->setNumberAnimations(1);
 
 	logo->setAnimationSpeed(0, 8);
 	logo->addKeyframe(0, glm::vec2(0.f, 0.f));
 
 	logo->changeAnimation(0);
-	logo->setPosition(glm::vec2(250, 64));
-	logo->setScale(glm::vec3(2.0f, 2.0f, 0.f));
+	logo->setPosition(glm::vec2(120, 64));
+	logo->setScale(glm::vec3(1.f, 1.0f, 0.f));
 }
 
 void MainMenu::hover(int textIndex, int isHover) {
 	switch (textIndex)
 	{
 	case 0:
-		textPlay->init(glm::vec2(float(288), float(160)), texProgram, 2,  "PLAY");
+		textPlay->init(glm::vec2(float(288), float(160)), texProgram, 1,  "PLAY");
 		break;
 	case 1:
-		textInstructions->init(glm::vec2(float(224), float(224)), texProgram, 2,  "INSTRUCTIONS");
+		textInstructions->init(glm::vec2(float(224), float(224)), texProgram, 1,  "INSTRUCTIONS");
 		break;
 	case 2:
-		textCredits->init(glm::vec2(float(264), float(288)), texProgram, 2, "CREDITS");
+		textCredits->init(glm::vec2(float(264), float(288)), texProgram, 1, "CREDITS");
 		break;
 	case 3:
-		textExit->init(glm::vec2(float(288), float(352)), texProgram, 2, "EXIT");
+		textExit->init(glm::vec2(float(288), float(352)), texProgram, 1, "EXIT");
 		break;
 	default:
 		break;

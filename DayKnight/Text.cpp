@@ -32,6 +32,7 @@ void Text::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, int 
 }
 
 void Text::initSprites(int size) {
+	
 	for (int i = 0; i < sizeText; ++i) {
 		sprite[i] = *Sprite::createSprite(glm::ivec2(16, 16), glm::vec2(0.03125, 0.5), &spritesheet, &shader);
 		sprite[i].setNumberAnimations(41);
@@ -162,8 +163,8 @@ void Text::initSprites(int size) {
 		sprite[i].addKeyframe(SPACE, glm::vec2(0.03125f * 30, 0.5f));
 
 		sprite[i].changeAnimation(SPACE);
-		sprite[i].setPosition(glm::vec2(float(posText.x + 8 * size * i), float(posText.y)));
-		sprite[i].setScale(glm::vec3(size, size, 0.f));
+		sprite[i].setPosition(glm::vec2(float(posText.x + 16 * size * i), float(posText.y)));
+		sprite[i].setScale(glm::vec3(size, size, 1));
 	}
 }
 

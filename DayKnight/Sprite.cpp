@@ -57,7 +57,10 @@ void Sprite::render() const
 	glm::mat4 modelview = glm::translate(glm::mat4(1.0f), glm::vec3(position.x, position.y, 0.f));
 	modelview = glm::translate(modelview, glm::vec3(+16, +16, 0.f));
 	modelview = glm::rotate(modelview, angle, glm::vec3(0, 0, 1));
-	modelview = glm::translate(modelview, glm::vec3(-16, -16, 0.f));
+	modelview = glm::translate(modelview, glm::vec3(0, +16, 0.f));
+	modelview = glm::scale(modelview, scale);
+	modelview = glm::translate(modelview, glm::vec3(-16, -32, 0.f));
+	//modelview = glm::translate(modelview, glm::vec3(-16, -16, 0.f));
 
 
 	shaderProgram->setUniformMatrix4f("modelview", modelview);
@@ -116,8 +119,6 @@ void Sprite::setPosition(const glm::vec2 &pos)
 }
 
 void Sprite::setAngle(const float newAngle) { angle = newAngle; }
-
-
 
 void Sprite::setScale(const glm::vec3& sc)
 {

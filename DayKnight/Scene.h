@@ -16,6 +16,10 @@
 // Scene contains all the entities of our game.
 // It is responsible for updating and render them.
 
+enum Level {
+	Level01, Level02, Level03, Level04
+};
+
 
 class Scene
 {
@@ -25,19 +29,32 @@ public:
 	~Scene();
 
 	void init();
+	
 	void update(int deltaTime);
 	void render();
 
-	void renderEntities();
-
-
-	void changelevel(int level);
+	void changelevel(Level newLevel);
 	void restart();
-	void finishLevel(int level);
+	void finishLevel();
 
 private:
+	void renderEntities();
+
+	void playerColisionWithEntity(const Enemy1 & other);
+
+	void initEntities();
 	void initShaders();
 	void initSpriteBackground();
+
+	string Scene::levelTxt(Level level) {
+		switch (level) {
+		case Level01: return "level01";
+		case Level02: return "level02";
+		case Level03: return "level03";
+		case Level04: return "level04";
+		}
+		return "level01";
+	}
 
 private:
 	TileMap *map;
@@ -45,13 +62,13 @@ private:
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
-	int level, screen;
+	Level level, screen;
 	Texture spritesheetBackground;
 	Sprite *background;
-	//Enemy1 *enemy;
+
 	MenuSuperior* menuSuperior;
 
-	vector<Entity> entites;
+	vector<Entity*> entites;
 	float cuentaAtras;
 	int playerPoints;
 };

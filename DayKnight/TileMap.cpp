@@ -116,7 +116,7 @@ bool TileMap::loadLevel(const string &levelFile)
 	return true;
 }
 
-void TileMap::setPositions(char tile, glm::ivec2 entityPos) {
+void TileMap::setPositions(char tile, const glm::ivec2 &entityPos) {
 	switch (tile)
 	{
 	default: return;
@@ -239,11 +239,6 @@ void TileMap::paintBottomTile(const glm::ivec2 &pos, const glm::ivec2 &size /*, 
 	reloadArrays();
 }
 
-int TileMap::getPaintedTiles()
-{
-	return paintedTiles;
-}
-
 bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) const
 {
 	int x, y0, y1;
@@ -298,6 +293,28 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	return false;
 }
 
+Edge TileMap::checkeEdge(const glm::ivec2 &pos, const glm::ivec2 &size) {
+	int x0, x1, y;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y = (pos.y + size.y ) / tileSize;
+	Edge edge = None;
+
+	bool ground = (map[y*mapSize.x+x0] != 0);
+	for (int x = x0 + 1; x <= x1; x++)
+	{
+		if (map[y*mapSize.x + x] == 0) {
+			if (ground) edge = Right;
+			ground = false;
+		}
+		else {
+			if (!ground) edge = Left;
+			ground = true;
+		}
+	}
+	return edge;
+}
 
 void TileMap::reloadArrays() {
 	prepareArrays(oldMinCoords, oldShader);

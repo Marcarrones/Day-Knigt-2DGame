@@ -16,6 +16,8 @@ enum PlayerAnims
 	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT
 };
 
+Player::Player() : Entity() {
+}
 
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
@@ -54,6 +56,22 @@ void Player::initSprite(ShaderProgram &shaderProgram)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
 
+
+bool Player::CheckCollision(Entity entity) {
+	bool collided = Entity::CheckCollision(entity);
+	if (!collided) return collided;
+
+	if (Enemy1 *enemy = dynamic_cast<Enemy1*>(&entity)) {
+		// No funciona pero deberia
+		live--;
+		
+		this->setPosition(map->playerPos);
+	}
+	return collided;
+}
+
+
+
 void Player::update(int deltaTime)
 {
 	int lookingRight = 1;
@@ -64,10 +82,10 @@ void Player::update(int deltaTime)
 
 		if (sprite->animation() != MOVE_LEFT)
 			sprite->changeAnimation(MOVE_LEFT);
-		posEntity.x -= 2;
-		if (map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)))
+		posEntity.x -= playerSpeed;
+		if(map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)))
 		{
-			posEntity.x += 2;
+			posEntity.x += playerSpeed;
 			sprite->changeAnimation(STAND_LEFT);
 		}
 	}
@@ -75,10 +93,10 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_RIGHT)
 			sprite->changeAnimation(MOVE_RIGHT);
-		posEntity.x += 2;
-		if (map->collisionMoveRight(posEntity, glm::ivec2(32, 32)))
+		posEntity.x += playerSpeed;
+		if(map->collisionMoveRight(posEntity, glm::ivec2(32, 32)))
 		{
-			posEntity.x -= 2;
+			posEntity.x -= playerSpeed;
 			sprite->changeAnimation(STAND_RIGHT);
 		}
 	}
@@ -104,7 +122,7 @@ void Player::update(int deltaTime)
 		else
 		{
 			posEntity.y = int(startY - 96 * sin(3.14159f * jumpAngle / 180.f));
-			if (jumpAngle > 90)
+			if(jumpAngle > 90)
 				bJumping = !map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y);
 		}
 	}
@@ -112,7 +130,7 @@ void Player::update(int deltaTime)
 	{
 		angle += deltaTime;
 		posEntity.y += FALL_STEP;
-		if (map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y))
+		if(map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y))
 		{
 			angle = 0;
 			if (Game::instance().getSpecialKey(GLUT_KEY_UP))
@@ -120,7 +138,7 @@ void Player::update(int deltaTime)
 				bJumping = true;
 				jumpAngle = 0;
 				startY = posEntity.y;
-			}	
+			}
 		}
 	}
 	//position->SetPos(posPlayer.x, posPlayer.y);
@@ -134,12 +152,12 @@ void Player::render()
 	Entity::render();
 }
 
-
+/*
 void Player::setPosition(const glm::vec2 &pos)
 {
 	posEntity = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
-}
+}*/
 
 int Player::getlive()
 {

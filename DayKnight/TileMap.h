@@ -13,6 +13,9 @@
 // it builds a single VBO that contains all tiles. As a result the render
 // method draws the whole map independently of what is visible.
 
+enum Edge {
+	Left, Right, None
+};
 
 class TileMap
 {
@@ -35,18 +38,20 @@ public:
 	bool collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int *posY) const;
+
+	Edge checkeEdge(const glm::ivec2 & pos, const glm::ivec2 & size);
 	
 	void paintBottomTile(const glm::ivec2 &pos, const glm::ivec2 &size);
 
 	int remainingTiles() { return paintableTiles - paintedTiles;  }
-	int getPaintedTiles();
+	int getPaintedTiles() { return paintedTiles; }
 
 	glm::ivec2 playerPos, keyPos, exitPos;
 	std::stack<glm::ivec2> enemy1Pos, enemy2Pos, enemy3Pos, itemPos, stopwatchPos, gemPos;
 
 private:
 	bool loadLevel(const string &levelFile);
-	void setPositions(char tile, glm::ivec2 entityPos);
+	void setPositions(char tile, const glm::ivec2 & entityPos);
 
 	void prepareArrays(const glm::vec2 &minCoords, ShaderProgram &program);
 	void reloadArrays();

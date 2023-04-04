@@ -47,7 +47,7 @@ private:
 	GLuint vbo;
 	GLint posLocation, texCoordLocation;
 	glm::vec2 position;
-	glm::vec3 scale;
+	glm::vec3 scale = glm::vec3(1,1,1);
 	float angle;
 	int currentAnimation, currentKeyframe;
 	float timeAnimation;
