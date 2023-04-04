@@ -56,6 +56,21 @@ void Player::initSprite(ShaderProgram &shaderProgram)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
 
+
+bool Player::CheckCollision(Entity entity) {
+	bool collided = Entity::CheckCollision(entity);
+	if (!collided) return collided;
+
+	if (Enemy1 *enemy = dynamic_cast<Enemy1*>(&entity)) {
+		live--;
+		
+		this->setPosition(map->playerPos);
+	}
+	return collided;
+}
+
+
+
 void Player::update(int deltaTime)
 {
 	int lookingRight = 1;
@@ -66,10 +81,10 @@ void Player::update(int deltaTime)
 
 		if (sprite->animation() != MOVE_LEFT)
 			sprite->changeAnimation(MOVE_LEFT);
-		posEntity.x -= 2;
+		posEntity.x -= playerSpeed;
 		if(map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)))
 		{
-			posEntity.x += 2;
+			posEntity.x += playerSpeed;
 			sprite->changeAnimation(STAND_LEFT);
 		}
 	}
@@ -77,10 +92,10 @@ void Player::update(int deltaTime)
 	{
 		if (sprite->animation() != MOVE_RIGHT)
 			sprite->changeAnimation(MOVE_RIGHT);
-		posEntity.x += 2;
+		posEntity.x += playerSpeed;
 		if(map->collisionMoveRight(posEntity, glm::ivec2(32, 32)))
 		{
-			posEntity.x -= 2;
+			posEntity.x -= playerSpeed;
 			sprite->changeAnimation(STAND_RIGHT);
 		}
 	}
@@ -136,12 +151,12 @@ void Player::render()
 	Entity::render();
 }
 
-
+/*
 void Player::setPosition(const glm::vec2 &pos)
 {
 	posEntity = pos;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
-}
+}*/
 
 int Player::getlive()
 {

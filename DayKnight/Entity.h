@@ -20,6 +20,8 @@ public:
 	virtual void update(int deltaTime);
 	void render();
 
+	bool CheckCollision(Entity other);
+
 	void setTileMap(TileMap *tileMap);
 	
 	void setPosition(const glm::vec2 &pos);
