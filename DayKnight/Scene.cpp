@@ -22,6 +22,7 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	menuSuperior = NULL;
+
 }
 
 Scene::~Scene()
@@ -47,7 +48,7 @@ void Scene::restart()
 {
 	changelevel(level);
 	return;
-
+    
 	currentTime = 0.0f;
 	menuSuperior = new MenuSuperior();
 	menuSuperior->init(glm::ivec2(SCREEN_X + 16, SCREEN_Y + 32), texProgram);
@@ -58,6 +59,7 @@ void Scene::restart()
 	player->setTileMap(map);
 	playerPoints = 0;
 	menuSuperior->changeLive(player->getlive());
+	cuentaAtras = 60000.f;
 	//enemy = new Enemy1();
 	//enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	//enemy->setPosition(glm::vec2(100, 50));
@@ -83,11 +85,12 @@ void Scene::finishLevel()
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
+	cuentaAtras -= deltaTime;
 	player->update(deltaTime);
 
 	background->update(deltaTime);
 	menuSuperior->update(deltaTime);
-	menuSuperior->updateTime(currentTime/1000);
+	menuSuperior->updateTime(cuentaAtras/1000);
 	menuSuperior->setPoints(playerPoints);
 
 	if (Game::instance().getKey(49)) {
@@ -125,6 +128,7 @@ void Scene::changelevel(Level newLevel)
 {
 	level = newLevel;
 	currentTime = 0.0f;
+    cuentaAtras = 60000.0f;
 	map = TileMap::createTileMap("levels/" + levelTxt(newLevel) + ".txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
 	
 	initEntities();

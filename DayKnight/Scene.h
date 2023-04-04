@@ -69,7 +69,7 @@ private:
 	MenuSuperior* menuSuperior;
 
 	vector<Entity*> entites;
-
+	float cuentaAtras;
 	int playerPoints;
 };
 
