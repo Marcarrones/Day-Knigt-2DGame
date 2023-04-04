@@ -45,11 +45,13 @@ void Enemy1::update(int deltaTime) {
 
 	switch (movementDir) {
 	case 1: // Right
-		if (edge == Right) changeDirection();
+		if (edge == Right || map->collisionMoveRight(posEntity, glm::ivec2(32, 32)) )
+			changeDirection();
+	break;
 	case -1: // Left
-		if (edge == Left) changeDirection();
-	default:
-		throw new exception("Unexpected direction");
+		if (edge == Left || map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)))
+			changeDirection();
+	break;
 	}
 
 	posEntity.x += enemySpeed*movementDir;
@@ -57,6 +59,7 @@ void Enemy1::update(int deltaTime) {
 	posEntity.y += FALL_STEP;
 
 	map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y);
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 
 }
 
@@ -80,7 +83,7 @@ void Enemy1::setTileMap(TileMap *tileMap)
 /*
 void Enemy1::setPosition(const glm::vec2 &pos)
 {
-	posEntity = pos;
+	posEntity = glm::ivec2(pos.x,pos.y);
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
-}*/
-
+}
+*/
