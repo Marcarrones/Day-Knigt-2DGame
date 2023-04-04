@@ -144,7 +144,6 @@ void TileMap::setPositions(char tile, const glm::ivec2 &entityPos) {
 		//ENEMIES
 	case 'e':
 		enemy1Pos.push(entityPos);
-		enemy1Pos.top();
 		break;
 	case 'r':
 		enemy2Pos.push(entityPos);
@@ -299,7 +298,7 @@ Edge TileMap::checkeEdge(const glm::ivec2 &pos, const glm::ivec2 &size) {
 
 	x0 = pos.x / tileSize;
 	x1 = (pos.x + size.x - 1) / tileSize;
-	y = (pos.y + size.y - 1) / tileSize;
+	y = (pos.y + size.y ) / tileSize;
 	Edge edge = None;
 
 	bool ground = (map[y*mapSize.x+x0] != 0);
