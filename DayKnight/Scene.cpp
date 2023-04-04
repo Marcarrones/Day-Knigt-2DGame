@@ -18,6 +18,7 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	menuSuperior = NULL;
+
 }
 
 Scene::~Scene()
@@ -34,6 +35,7 @@ void Scene::init()
 	initShaders();
 	projection = glm::ortho(0.f, float(SCREEN_WIDTH - 1), float(SCREEN_HEIGHT - 1), 0.f);
 	currentTime = 0.0f;
+	cuentaAtras = 60000.f;
 	menuSuperior = new MenuSuperior();
 	menuSuperior->init(glm::ivec2(SCREEN_X+16, SCREEN_Y+32), texProgram);
 /*
@@ -73,6 +75,7 @@ void Scene::restart()
 	player->setTileMap(map);
 	playerPoints = 0;
 	menuSuperior->changeLive(player->getlive());
+	cuentaAtras = 60000.f;
 	//enemy = new Enemy1();
 	//enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	//enemy->setPosition(glm::vec2(100, 50));
@@ -92,10 +95,11 @@ void Scene::finishLevel(int level)
 void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
+	cuentaAtras -= deltaTime;
 	player->update(deltaTime);
 	background->update(deltaTime);
 	menuSuperior->update(deltaTime);
-	menuSuperior->updateTime(currentTime/1000);
+	menuSuperior->updateTime(cuentaAtras/1000);
 	menuSuperior->setPoints(playerPoints);
 	if (Game::instance().getKey(49)) {
 		changelevel(1);
@@ -140,6 +144,8 @@ void Scene::changelevel(int level)
 	player->setPosition(map->playerPos);
 	player->setTileMap(map);
 	this->level = level;
+	cuentaAtras = 60.f;
+
 }
 
 
