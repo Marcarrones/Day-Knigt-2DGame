@@ -61,12 +61,12 @@ bool Player::CheckCollision(Entity entity) {
 	bool collided = Entity::CheckCollision(entity);
 	if (!collided) return collided;
 
-	if (Enemy1 *enemy = dynamic_cast<Enemy1*>(&entity)) {
+	/*if (Enemy1 *enemy = dynamic_cast<Enemy1*>(&entity)) {
 		// No funciona pero deberia
-		live--;
+		//live--;
 		
 		this->setPosition(map->playerPos);
-	}
+	}*/
 	return collided;
 }
 

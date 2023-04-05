@@ -35,6 +35,7 @@ public:
 	void update(int deltaTime);
 	void render();
 
+	void showKey();
 	void changelevel(Level newLevel);
 	void restart();
 	void finishLevel();
@@ -75,6 +76,7 @@ private:
 	vector<Entity*> entites;
 	float cuentaAtras;
 	int playerPoints;
+	bool inScreenKey;
 };
 
 

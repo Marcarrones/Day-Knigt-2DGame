@@ -36,11 +36,6 @@ void Key::show()
 	sprite->changeAnimation(SHOW);
 }
 
-bool Key::isShow()
-{
-	return showing;
-}
-
 bool Key::isPicked()
 {
 	return pick;
