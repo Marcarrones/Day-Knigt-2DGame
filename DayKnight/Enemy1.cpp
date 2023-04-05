@@ -41,7 +41,7 @@ void Enemy1::initSprite(ShaderProgram &shaderProgram)
 void Enemy1::update(int deltaTime) {
 	sprite->update(deltaTime);
 
-	Edge edge = map->checkeEdge(posEntity, glm::ivec2(32, 32));
+	Edge edge = map->checkEdge(posEntity, glm::ivec2(32, 32));
 
 	switch (movementDir) {
 	case 1: // Right

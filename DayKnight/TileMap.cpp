@@ -218,27 +218,26 @@ void TileMap::paintBottomTile(const glm::ivec2 &pos, const glm::ivec2 &size /*, 
 
 	x0 = pos.x / tileSize;
 	x1 = (pos.x + size.x - 1) / tileSize;
-	y = (pos.y + size.y - 2) / tileSize;
-
+	y = (pos.y + size.y) / tileSize;
+	bool painted = false;
 	for (int x = x0; x <= x1; x++)
 	{
-		int valuePre = map[(y + 1)*mapSize.x + x];
+		int valuePre = map[y*mapSize.x + x];
 		bool isPaintable = (valuePre == tilePainting[0].first|| valuePre == tilePainting[1].first);
 
-		if (map[(y + 1)*mapSize.x + x] == tilePainting[0].first) {
+		if (map[y*mapSize.x + x] == tilePainting[0].first) {
+			painted = true;
 			paintedTiles++;
-			map[(y + 1)*mapSize.x + x] = tilePainting[0].second;
+			map[y*mapSize.x + x] = tilePainting[0].second;
 		}
-		else if (map[(y + 1)*mapSize.x + x] == tilePainting[1].first) {
+		else if (map[y*mapSize.x + x] == tilePainting[1].first) {
+			painted = true;
 			paintedTiles++;
-			map[(y + 1)*mapSize.x + x] = tilePainting[1].second;
+			map[y*mapSize.x + x] = tilePainting[1].second;
 		}
-		int valuePost = map[(y + 1)*mapSize.x + x];
-		if (isPaintable) {
-
-		}	
+		//int valuePost = map[(y + 1)*mapSize.x + x];
 	}
-	reloadArrays();
+	if (painted) reloadArrays();
 }
 
 bool TileMap::collisionMoveLeft(const glm::ivec2 &pos, const glm::ivec2 &size) const
@@ -295,7 +294,7 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 	return false;
 }
 
-Edge TileMap::checkeEdge(const glm::ivec2 &pos, const glm::ivec2 &size) {
+Edge TileMap::checkEdge(const glm::ivec2 &pos, const glm::ivec2 &size) {
 	int x0, x1, y;
 
 	x0 = pos.x / tileSize;
@@ -316,6 +315,26 @@ Edge TileMap::checkeEdge(const glm::ivec2 &pos, const glm::ivec2 &size) {
 		}
 	}
 	return edge;
+}
+
+bool TileMap::checkSpike(const glm::ivec2 &pos, const glm::ivec2 &size) const
+{
+	int x0, x1, y;
+
+	x0 = pos.x / tileSize;
+	x1 = (pos.x + size.x - 1) / tileSize;
+	y = (pos.y + size.y) / tileSize;
+	bool onlySpike = true;
+
+	for (int x = x0; x <= x1; x++)
+	{
+		if (onlySpike == false) break;
+		if (map[y*mapSize.x + x] == spikeTiles.first || map[y*mapSize.x + x] == spikeTiles.second) 
+			onlySpike = true;
+		else onlySpike = false;
+	}
+
+	return onlySpike;
 }
 
 void TileMap::reloadArrays() {
