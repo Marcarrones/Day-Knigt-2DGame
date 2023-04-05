@@ -129,7 +129,9 @@ void TileMap::setPositions(char tile, const glm::ivec2 &entityPos) {
 	case 'd':	// EXIT DOOR
 		exitPos = entityPos;
 		break;
-		
+	case 'c':
+		clockPos = entityPos;
+		break;
 		//ITEMS
 	case 'i':
 		itemPos.push(entityPos);

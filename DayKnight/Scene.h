@@ -10,6 +10,7 @@
 #include "MenuSuperior.h"
 #include "StartEndDoor.h"
 #include "Key.h"
+#include "Clock.h"
 #define SCREEN_X 32
 #define SCREEN_Y 16
 
@@ -67,6 +68,7 @@ private:
 	Texture spritesheetBackground;
 	Sprite *background;
 	Key *key;
+	Clock *clock;
 
 	MenuSuperior* menuSuperior;
 	StartEndDoor* startEndDoor;

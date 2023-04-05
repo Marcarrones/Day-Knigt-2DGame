@@ -133,6 +133,7 @@ void Scene::update(int deltaTime)
 	}
 	startEndDoor->update(deltaTime);
 	key->update(deltaTime);
+	clock->update(deltaTime);
 }
 
 void Scene::changelevel(Level newLevel)
@@ -178,6 +179,8 @@ void Scene::renderEntities() {
 
 	// Mirar si todo el suelo está pintado 
 	key->render();
+
+	clock->render();
 }
 
 #pragma endregion
@@ -231,6 +234,14 @@ void Scene::initEntities() {
 	key->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	key->setPosition(map->keyPos);
 	key->setTileMap(map);
+
+	// Clock pos 
+
+	clock = new Clock();
+	clock->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	clock->setPosition(map->clockPos);
+	clock->setTileMap(map);
+
 
 }
 
