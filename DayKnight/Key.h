@@ -16,7 +16,6 @@ public:
 	/*
 	Para no mostrar la llave deja de hacer render de la llave*/
 	void show();
-	bool isShow();
 	bool isPicked();
 
 	~Key();

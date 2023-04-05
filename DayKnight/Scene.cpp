@@ -42,7 +42,7 @@ void Scene::init()
 	
 	changelevel(Level01);
 	initSpriteBackground();
-
+	inScreenKey = false;
 	
 }
 
@@ -63,6 +63,7 @@ void Scene::restart()
 	playerPoints = 0;
 	menuSuperior->changeLive(player->getlive());
 	cuentaAtras = 60000.f;
+	inScreenKey = false;
 	//startEndDoor = new StartEndDoor();
 	//startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	//enemy = new Enemy1();
@@ -110,13 +111,24 @@ void Scene::update(int deltaTime)
 	if (Game::instance().getKey(51)) {
 		changelevel(Level03);
 	}
+
+	if (Game::instance().getKey(107)) {
+		showKey();
+	}
 	
+	if (Game::instance().getKey(105)) {
+		player->changeImmune();
+	}
 	for (int i = 0; i < entites.size(); i++) {
 		Entity* e = entites[i];
 
 		e->update(deltaTime);
 
-		player->CheckCollision(*e);
+		if (player->CheckCollision(*e)) {
+			int live = player->getlive();
+			live -= 1;
+			player->changelive(live);
+		}
 	}
 
 	if (player->getlive() <= 0) {
@@ -131,9 +143,15 @@ void Scene::update(int deltaTime)
 	if (startEndDoor->isOpenClose()) {
 		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
 	}
+	menuSuperior->changeLive(player->getlive());
 	startEndDoor->update(deltaTime);
 	key->update(deltaTime);
 	clock->update(deltaTime);
+}
+
+void Scene::showKey()
+{
+	inScreenKey = true;
 }
 
 void Scene::changelevel(Level newLevel)
@@ -177,8 +195,11 @@ void Scene::renderEntities() {
 	}
 	startEndDoor->render();
 
-	// Mirar si todo el suelo está pintado 
-	key->render();
+	// TODO: Mirar si todo el suelo está pintado 
+	if (inScreenKey){
+		key->render();
+	}
+
 
 	clock->render();
 }

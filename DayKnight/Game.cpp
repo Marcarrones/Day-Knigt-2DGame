@@ -82,17 +82,20 @@ void Game::keyPressed(int key)
 		}
 	}
 
+	/*
 	if (key == 109)
 		currentScreen = MAIN_MENU;
 	if (key == 103)
 		currentScreen = GAME;
 	if (key == 99)
 		currentScreen = CREDITS;
+	if (key == 105)
+		currentScreen = INSTRUCTIONS;*/
+
 	if (key == 114 && currentScreen == GAME) {
 		scene.restart();
 	}
-	if (key == 105)
-		currentScreen = INSTRUCTIONS;
+
 	
 	std::cout << key << endl;
 	keys[key] = true;
