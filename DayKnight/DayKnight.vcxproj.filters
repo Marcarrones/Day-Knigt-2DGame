@@ -61,6 +61,9 @@
     <ClCompile Include="Key.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Clock.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimKeyframes.h">
@@ -121,6 +124,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="Key.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Clock.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

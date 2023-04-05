@@ -46,7 +46,7 @@ public:
 	int remainingTiles() { return paintableTiles - paintedTiles;  }
 	int getPaintedTiles() { return paintedTiles; }
 
-	glm::ivec2 playerPos, keyPos, exitPos;
+	glm::ivec2 playerPos, keyPos, exitPos, clockPos;
 	std::stack<glm::ivec2> enemy1Pos, enemy2Pos, enemy3Pos, itemPos, stopwatchPos, gemPos;
 
 private:

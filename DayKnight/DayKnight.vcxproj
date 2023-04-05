@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AnimKeyframes.h" />
+    <ClInclude Include="Clock.h" />
     <ClInclude Include="CollisionBox.h" />
     <ClInclude Include="Credits.h" />
     <ClInclude Include="Enemy1.h" />
@@ -149,6 +150,7 @@
     <ClInclude Include="TileMap.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Clock.cpp" />
     <ClCompile Include="CollisionBox.cpp" />
     <ClCompile Include="Credits.cpp" />
     <ClCompile Include="Enemy1.cpp" />
