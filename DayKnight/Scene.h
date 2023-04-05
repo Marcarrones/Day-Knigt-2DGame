@@ -8,7 +8,7 @@
 #include "Player.h"
 #include "Enemy1.h"
 #include "MenuSuperior.h"
-
+#include "StartEndDoor.h"
 #define SCREEN_X 32
 #define SCREEN_Y 16
 
@@ -67,7 +67,7 @@ private:
 	Sprite *background;
 
 	MenuSuperior* menuSuperior;
-
+	StartEndDoor* startEndDoor;
 	vector<Entity*> entites;
 	float cuentaAtras;
 	int playerPoints;
