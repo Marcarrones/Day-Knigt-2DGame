@@ -63,8 +63,8 @@ void Scene::restart()
 	playerPoints = 0;
 	menuSuperior->changeLive(player->getlive());
 	cuentaAtras = 60000.f;
-	startEndDoor = new StartEndDoor();
-	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, glm::vec2(22 * map->getTileSize(), 3 * map->getTileSize()), 0);
+	//startEndDoor = new StartEndDoor();
+	//startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	//enemy = new Enemy1();
 	//enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	//enemy->setPosition(glm::vec2(100, 50));
@@ -132,6 +132,7 @@ void Scene::update(int deltaTime)
 		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
 	}
 	startEndDoor->update(deltaTime);
+	key->update(deltaTime);
 }
 
 void Scene::changelevel(Level newLevel)
@@ -162,7 +163,7 @@ void Scene::render()
 	background->render();
 	map->render();
 	menuSuperior->render();
-	startEndDoor->render();
+
 	renderEntities();
 	//enemy->render();
 }
@@ -173,7 +174,10 @@ void Scene::renderEntities() {
 	for (int i = 0; i < entites.size(); i++) {
 		entites[i]->render();
 	}
+	startEndDoor->render();
 
+	// Mirar si todo el suelo está pintado 
+	key->render();
 }
 
 #pragma endregion
@@ -212,8 +216,21 @@ void Scene::initEntities() {
 
 
 	startEndDoor = new StartEndDoor();
-	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, map->exitPos, 0);
+	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	glm::vec2 exitPos = map->exitPos;
+	exitPos.y += 16;
+	exitPos.x += 16;
+	// TODO: Revisar esto porque si no se añade 16 de altura se queda arriba
+	startEndDoor->setPosition(exitPos);
+	startEndDoor->setTileMap(map);
 
+
+	// key pos 
+
+	key = new Key();
+	key->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	key->setPosition(map->keyPos);
+	key->setTileMap(map);
 
 }
 
