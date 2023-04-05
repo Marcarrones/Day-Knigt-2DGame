@@ -129,6 +129,12 @@
     <ClInclude Include="Clock.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="ICollider.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ICollidable.h">
+      <Filter>headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="headers">
