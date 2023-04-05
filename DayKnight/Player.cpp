@@ -59,8 +59,7 @@ bool Player::collidedBy(ICollider *collider) {
 
 bool Player::collideWith(Enemy1 *other) {
 	if (collider.CheckColission(other->collider)) {
-		live--;
-		setPosition(map->playerPos);
+		damagePlayer();
 		return true;
 	}
 	return false;
@@ -154,15 +153,18 @@ void Player::update(int deltaTime)
 	}
 	//position->SetPos(posPlayer.x, posPlayer.y);
 	paintTiles();
+	if (map->checkSpike(posEntity, glm::ivec2(32, 32))) {
+		damagePlayer();
+	}
+
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 	sprite->setAngle(lookingRight * (angle / 120));
 }
 
-void Player::render()
-{
-	Entity::render();
+void Player::damagePlayer() {
+	live--;
+	setPosition(map->playerPos);
 }
-
 
 void Player::setPosition(const glm::vec2 &pos)
 {

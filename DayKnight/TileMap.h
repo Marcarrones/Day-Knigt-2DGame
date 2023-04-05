@@ -39,8 +39,9 @@ public:
 	bool collisionMoveRight(const glm::ivec2 &pos, const glm::ivec2 &size) const;
 	bool collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, int *posY) const;
 
-	Edge checkeEdge(const glm::ivec2 & pos, const glm::ivec2 & size);
-	
+	Edge checkEdge(const glm::ivec2 & pos, const glm::ivec2 & size);
+	bool checkSpike(const glm::ivec2 &pos, const glm::ivec2 &size) const;
+
 	void paintBottomTile(const glm::ivec2 &pos, const glm::ivec2 &size);
 
 	int remainingTiles() { return paintableTiles - paintedTiles;  }
@@ -71,6 +72,7 @@ private:
 	// y a que nuevas tiles [0].second y [1].second respectivamente
 	// Evitar que se el primero y el segundo sean los mismos (ej de que no hacer: (1,2) (2,4) -> Pinta dos veces
 	pair<int, int> tilePainting[2] = { pair<int,int>(2,1), pair<int,int > (5,4) };
+	pair<int, int> spikeTiles = pair<int, int>(3, 6);
 
 	glm::vec2 oldMinCoords;
 	ShaderProgram oldShader;
