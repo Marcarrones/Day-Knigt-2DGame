@@ -16,9 +16,6 @@ enum PlayerAnims
 	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT
 };
 
-Player::Player() : Entity() {
-}
-
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	Entity::init(tileMapPos, shaderProgram);
@@ -27,7 +24,6 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 	live = 3;
 	immune = false;
 	initSprite(shaderProgram);
-	
 }
 
 void Player::initSprite(ShaderProgram &shaderProgram)
@@ -56,18 +52,33 @@ void Player::initSprite(ShaderProgram &shaderProgram)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
 
+bool Player::collidedBy(ICollider *collider) {
+	// Es "impossible" que un collider (Player) colisione con esta instancia de Entity (AKA PLAYER)
+	return false;
+}
 
-bool Player::CheckCollision(Entity entity) {
-	bool collided = Entity::CheckCollision(entity);
-	if (!collided) return collided;
+bool Player::collideWith(Enemy1 *other) {
+	if (collider.CheckColission(other->collider)) {
+		live--;
+		setPosition(map->playerPos);
+		return true;
+	}
+	return false;
+}
 
-	/*if (Enemy1 *enemy = dynamic_cast<Enemy1*>(&entity)) {
-		// No funciona pero deberia
-		//live--;
-		
-		this->setPosition(map->playerPos);
-	}*/
-	return collided;
+bool Player::collideWith(Key * other)
+{
+	return false;
+}
+
+bool Player::collideWith(Clock * other)
+{
+	return false;
+}
+
+bool Player::collideWith(StartEndDoor * other)
+{
+	return false;
 }
 
 
@@ -152,12 +163,14 @@ void Player::render()
 	Entity::render();
 }
 
-/*
+
 void Player::setPosition(const glm::vec2 &pos)
 {
 	posEntity = pos;
+	startY = posEntity.y;
+	bJumping = false;
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
-}*/
+}
 
 int Player::getlive()
 {

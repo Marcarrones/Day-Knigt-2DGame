@@ -9,11 +9,14 @@ class StartEndDoor:public Entity
 public:
 	~StartEndDoor();
 	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram);
-	void update(int deltaTime);
+	void update(int deltaTime) override;
 	void render();
 
 	void setTileMap(TileMap* tileMap);
 	void setPosition(const glm::vec2& pos);
+
+	virtual bool collidedBy(ICollider *collider) override
+		{ return collider->collideWith(this); }	
 	void open();
 	void close();
 	glm::ivec2 getPosition();

@@ -99,6 +99,7 @@ void Scene::update(int deltaTime)
 	menuSuperior->updateTime(cuentaAtras/1000);
 	menuSuperior->setPoints(playerPoints);
 	
+	// MOVER A GAME
 	if (Game::instance().getKey(49)) {
 		changelevel(Level01);
 		
@@ -124,12 +125,7 @@ void Scene::update(int deltaTime)
 
 		e->update(deltaTime);
 
-		if (player->CheckCollision(*e) && !player->isImmune()) {
-			int live = player->getlive();
-			live -= 1;
-			player->changelive(live);
-			player->setPosition(map->playerPos);
-		}
+		e->collidedBy(player);
 	}
 
 	if (player->getlive() < 0) {
@@ -138,17 +134,30 @@ void Scene::update(int deltaTime)
 	}
 	// Check if map cleared
 	if (map->remainingTiles() <= 0) {
+		// Visisbilidad llave
 		startEndDoor->open();
 		//finishLevel();
 	}
 
+	// Abrir puerta
+	if (player->collideWith(key)) startEndDoor->open();
+	
+
 	if (startEndDoor->isOpenClose()) {
 		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
+		player->collideWith(startEndDoor);
+		
 	}
-	menuSuperior->changeLive(player->getlive());
+	
 	startEndDoor->update(deltaTime);
 	key->update(deltaTime);
 	clock->update(deltaTime);
+	
+	if (player->getlive() < 0) {
+		restart();
+	}
+	
+	menuSuperior->changeLive(player->getlive());
 }
 
 void Scene::showKey()
@@ -197,7 +206,7 @@ void Scene::renderEntities() {
 	}
 	startEndDoor->render();
 
-	// TODO: Mirar si todo el suelo está pintado 
+	// TODO: Mirar si todo el suelo estï¿½ pintado 
 	if (inScreenKey){
 		key->render();
 	}
@@ -246,7 +255,7 @@ void Scene::initEntities() {
 	glm::vec2 exitPos = map->exitPos;
 	exitPos.y += 16;
 	exitPos.x += 16;
-	// TODO: Revisar esto porque si no se añade 16 de altura se queda arriba
+	// TODO: Revisar esto porque si no se aï¿½ade 16 de altura se queda arriba
 	startEndDoor->setPosition(exitPos);
 	startEndDoor->setTileMap(map);
 

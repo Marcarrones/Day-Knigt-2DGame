@@ -1,26 +1,29 @@
-#ifndef _ENTITY_INCLUDE
-#define _ENTITY_INCLUDE
+#ifndef _ENTITY_
+#define _ENTITY_
 
 #include "Sprite.h"
-#include "Position.h"
+//#include "Position.h"
 #include "CollisionBox.h"
 #include "TileMap.h"
+#include "ICollidable.h"
+#include "ICollider.h"
 
 // Base entity class, represents any object present in the scene
 
-class Entity
+class Entity : public ICollidable 
 {
 public:
 	CollisionBox collider;
 
-	Entity();
+	//Entity();
 
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	
 	virtual void update(int deltaTime);
 	void render();
 
-	bool CheckCollision(Entity other);
+	// VISITOR PATTERN COLLISION
+	virtual bool collidedBy(ICollider *collider) = 0;
 
 	void setTileMap(TileMap *tileMap);
 	

@@ -7,8 +7,11 @@ class Clock: public Entity
 public:
 	Clock();
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	virtual void update(int deltaTime);
+	void update(int deltaTime) override;
 	void render();
+	virtual bool collidedBy(ICollider *collider) override
+		{ return collider->collideWith(this); }
+
 	void setTileMap(TileMap *tileMap);
 	void StopTime();
 	bool isStopTime();

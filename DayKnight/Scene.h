@@ -43,7 +43,7 @@ public:
 private:
 	void renderEntities();
 
-	void playerColisionWithEntity(const Enemy1 & other);
+	//void playerColisionWithEntity(const Enemy1 & other);
 
 	void initEntities();
 	void initShaders();
@@ -61,19 +61,22 @@ private:
 
 private:
 	TileMap *map;
-	Player *player;
 	ShaderProgram texProgram;
 	float currentTime;
 	glm::mat4 projection;
+	
 	Level level, screen;
+	
 	Texture spritesheetBackground;
 	Sprite *background;
+
+	Player *player;
 	Key *key;
 	Clock *clock;
-
-	MenuSuperior* menuSuperior;
 	StartEndDoor* startEndDoor;
 	vector<Entity*> entites;
+	
+	MenuSuperior* menuSuperior;
 	float cuentaAtras;
 	int playerPoints;
 	bool inScreenKey;
