@@ -21,7 +21,7 @@ void StartEndDoor::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgr
 	posDoor = pos;
 	sprite = new Sprite();
 	spritesheet.loadFromFile("images/puerta_colores.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(24, 32), glm::vec2(0.5, 1.0), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(12,12), glm::vec2(0.5, 0.5), &spritesheet, &shaderProgram);
 	sprite->setNumberAnimations(2);
 
 	sprite->setAnimationSpeed(CLOSED, 8);
@@ -32,7 +32,8 @@ void StartEndDoor::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgr
 
 	sprite->changeAnimation(state);
 	tileMapDispl = tileMapPos;
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posDoor.x), float(tileMapDispl.y + posDoor.y)));
+	isOpen = state;
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posDoor.x), float(tileMapDispl.y+posDoor.y)));
 	sprite->setScale(glm::vec3(2.f, 2.f, 0.f));
 }
 
@@ -62,10 +63,17 @@ glm::ivec2 StartEndDoor::getPosition() {
 	return posDoor;
 }
 
+bool StartEndDoor::isOpenClose()
+{
+	return isOpen;
+}
+
 void StartEndDoor::open() {
 	sprite->changeAnimation(OPENED);
+	isOpen = OPENED;
 }
 
 void StartEndDoor::close() {
 	sprite->changeAnimation(CLOSED);
+	isOpen = CLOSED;
 }

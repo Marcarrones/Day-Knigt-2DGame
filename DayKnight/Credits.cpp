@@ -27,19 +27,19 @@ void Credits::printTexts() {
 	texts = new Text[11];
 
 	texts[0].init(glm::vec2(float(96), float(100)), texProgram, 2, "DEVELOPED BY");
-	texts[1].init(glm::vec2(float(96), float(120)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
+	texts[1].init(glm::vec2(float(96), float(140)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
 
-	texts[2].init(glm::vec2(float(96), float(160)), texProgram, 2, "MAPS DESIGNED BY");
-	texts[3].init(glm::vec2(float(96), float(180)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
+	//texts[2].init(glm::vec2(float(96), float(180)), texProgram, 2, "MAPS DESIGNED BY");
+	//texts[3].init(glm::vec2(float(96), float(220)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH");
 
-	texts[4].init(glm::vec2(float(96), float(210)), texProgram, 2, "CHARACTERS MODIFICATIONS BY");
-	texts[5].init(glm::vec2(float(96), float(230)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH ");
+	//texts[4].init(glm::vec2(float(96), float(210)), texProgram, 2, "CHARACTERS MODIFICATIONS BY");
+	//texts[5].init(glm::vec2(float(96), float(230)), texProgram, 2, "HAOPENG LIN AND MARCH DUCH ");
 
 	texts[6].init(glm::vec2(float(96), float(270)), texProgram, 2,"ORIGINAL TILESHEETS");
 	texts[7].init(glm::vec2(float(96), float(290)), texProgram, 2,"THE SPRITERS RESOURCE");
 
-	texts[8].init(glm::vec2(float(96), float(330)), texProgram, 2, "MUSIC BY");
-	texts[9].init(glm::vec2(float(96), float(350)), texProgram, 2, "WWW.VGMPF.COM");
+	//texts[8].init(glm::vec2(float(96), float(330)), texProgram, 2, "MUSIC BY");
+	//texts[9].init(glm::vec2(float(96), float(350)), texProgram, 2, "WWW.VGMPF.COM");
 
 	texts[10].init(glm::vec2(float(136), float(450)), texProgram, 2, "PRESS ESC TO GO TO MENU");
 }

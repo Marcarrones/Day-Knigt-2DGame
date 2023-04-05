@@ -22,6 +22,7 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	menuSuperior = NULL;
+	startEndDoor = NULL;
 
 }
 
@@ -41,6 +42,8 @@ void Scene::init()
 	
 	changelevel(Level01);
 	initSpriteBackground();
+
+	
 }
 
 
@@ -60,6 +63,8 @@ void Scene::restart()
 	playerPoints = 0;
 	menuSuperior->changeLive(player->getlive());
 	cuentaAtras = 60000.f;
+	startEndDoor = new StartEndDoor();
+	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, glm::vec2(22 * map->getTileSize(), 3 * map->getTileSize()), 0);
 	//enemy = new Enemy1();
 	//enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	//enemy->setPosition(glm::vec2(100, 50));
@@ -92,7 +97,7 @@ void Scene::update(int deltaTime)
 	menuSuperior->update(deltaTime);
 	menuSuperior->updateTime(cuentaAtras/1000);
 	menuSuperior->setPoints(playerPoints);
-
+	
 	if (Game::instance().getKey(49)) {
 		changelevel(Level01);
 		
@@ -119,9 +124,14 @@ void Scene::update(int deltaTime)
 	}
 	// Check if map cleared
 	if (map->remainingTiles() <= 0) {
-		finishLevel();
+		startEndDoor->open();
+		//finishLevel();
 	}
 
+	if (startEndDoor->isOpenClose()) {
+		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
+	}
+	startEndDoor->update(deltaTime);
 }
 
 void Scene::changelevel(Level newLevel)
@@ -130,11 +140,9 @@ void Scene::changelevel(Level newLevel)
 	currentTime = 0.0f;
     cuentaAtras = 60000.0f;
 	map = TileMap::createTileMap("levels/" + levelTxt(newLevel) + ".txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	
+
 	initEntities();
-
 	menuSuperior = new MenuSuperior();
-
 	menuSuperior->init(glm::ivec2(SCREEN_X + 16, SCREEN_Y + 32), texProgram);
 	menuSuperior->changeLive(player->getlive());
 }
@@ -154,7 +162,7 @@ void Scene::render()
 	background->render();
 	map->render();
 	menuSuperior->render();
-	
+	startEndDoor->render();
 	renderEntities();
 	//enemy->render();
 }
@@ -199,6 +207,12 @@ void Scene::initEntities() {
 		entites.push_back(n);
 		positions.pop();
 	}
+
+	// Door pos
+
+
+	startEndDoor = new StartEndDoor();
+	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram, map->exitPos, 0);
 
 
 }

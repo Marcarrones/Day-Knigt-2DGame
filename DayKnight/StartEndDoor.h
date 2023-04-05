@@ -20,12 +20,13 @@ public:
 	void open();
 	void close();
 	glm::ivec2 getPosition();
-
+	bool isOpenClose();
 private:
 	glm::ivec2 tileMapDispl, posDoor;
 	Texture spritesheet;
 	Sprite* sprite;
 	TileMap* map;
+	bool isOpen;
 };
 
 
