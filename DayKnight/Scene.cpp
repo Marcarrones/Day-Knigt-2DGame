@@ -124,15 +124,17 @@ void Scene::update(int deltaTime)
 
 		e->update(deltaTime);
 
-		if (player->CheckCollision(*e)) {
+		if (player->CheckCollision(*e) && !player->isImmune()) {
 			int live = player->getlive();
 			live -= 1;
 			player->changelive(live);
+			player->setPosition(map->playerPos);
 		}
 	}
 
-	if (player->getlive() <= 0) {
+	if (player->getlive() < 0) {
 		// SE MAMO
+		restart();
 	}
 	// Check if map cleared
 	if (map->remainingTiles() <= 0) {
