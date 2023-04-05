@@ -98,6 +98,7 @@ void Scene::update(int deltaTime)
 	menuSuperior->updateTime(cuentaAtras/1000);
 	menuSuperior->setPoints(playerPoints);
 	
+	// MOVER A GAME
 	if (Game::instance().getKey(49)) {
 		changelevel(Level01);
 		
@@ -111,12 +112,14 @@ void Scene::update(int deltaTime)
 		changelevel(Level03);
 	}
 	
+
+
 	for (int i = 0; i < entites.size(); i++) {
 		Entity* e = entites[i];
 
 		e->update(deltaTime);
 
-		player->CheckCollision(*e);
+		e->collidedBy(player);
 	}
 
 	if (player->getlive() <= 0) {
@@ -124,16 +127,30 @@ void Scene::update(int deltaTime)
 	}
 	// Check if map cleared
 	if (map->remainingTiles() <= 0) {
+		// Visisbilidad llave
 		startEndDoor->open();
 		//finishLevel();
 	}
 
+	// Abrir puerta
+	if (player->collideWith(key)) startEndDoor->open();
+	
+
 	if (startEndDoor->isOpenClose()) {
 		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
+		player->collideWith(startEndDoor);
+		
 	}
+	
 	startEndDoor->update(deltaTime);
 	key->update(deltaTime);
 	clock->update(deltaTime);
+	
+	if (player->getlive() < 0) {
+		restart();
+	}
+	
+	menuSuperior->changeLive(player->getlive());
 }
 
 void Scene::changelevel(Level newLevel)

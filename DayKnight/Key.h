@@ -6,15 +6,16 @@
 class Key: public Entity
 {
 public:
-	Key();
 
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 
-	virtual void update(int deltaTime);
+	void update(int deltaTime) override;
 	void render();
+	virtual bool collidedBy(ICollider *collider) override
+		{ return collider->collideWith(this); }
+
 	void setTileMap(TileMap *tileMap);
-	/*
-	Para no mostrar la llave deja de hacer render de la llave*/
+	/* Para no mostrar la llave deja de hacer render de la llave*/
 	void show();
 	bool isShow();
 	bool isPicked();

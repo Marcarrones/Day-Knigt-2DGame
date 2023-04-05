@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity() {	}
+//Entity::Entity() {	}
 
 void Entity::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 {
@@ -24,10 +24,11 @@ void Entity::render()
 	collider.render();
 }
 
-bool Entity::CheckCollision(Entity other) {
-	return collider.CheckColission(other.collider);
-}
-
+/*
+bool Entity::collideBy(ICollider *collider) {
+	return collider->collideWith(this);
+}	
+*/
 void Entity::setTileMap(TileMap * tileMap)
 {
 	map = tileMap;

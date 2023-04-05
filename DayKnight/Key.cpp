@@ -5,9 +5,6 @@ enum {
 	PICKED
 };
 
-Key::Key()
-{
-}
 
 void Key::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 {

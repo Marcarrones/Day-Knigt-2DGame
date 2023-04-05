@@ -8,7 +8,7 @@ enum EnemyAnims
 };
 
 
-Enemy1::Enemy1() : Entity() { }
+//Enemy1::Enemy1() : Entity() { }
 
 void Enemy1::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
@@ -69,11 +69,11 @@ void Enemy1::changeDirection() {
 	sprite->changeAnimation(sprite->animation() == MOVE_LEFT ? MOVE_RIGHT : MOVE_LEFT);
 }
 
-void Enemy1::render()
+/*void Enemy1::render()
 {
 	Entity::render();
 	//sprite->render();
-}
+}*/
 
 void Enemy1::setTileMap(TileMap *tileMap)
 {
