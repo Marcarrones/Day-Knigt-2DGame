@@ -237,7 +237,7 @@ void Scene::initEntities() {
 
 	positions = map->enemy1Pos;
 	while(!positions.empty()) {
-		Enemy1* n = new Enemy1();
+		Enemy* n = new Enemy(); // Cambiar a implementacion de Enemy1/Skeleton
 
 		n->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		n->setPosition(positions.top());

@@ -3,7 +3,7 @@
 
 
 // Forward declarations (evita includes circulares)
-class Enemy1;
+class Enemy;
 class Key;
 class Clock;
 class StartEndDoor;
@@ -17,7 +17,7 @@ public:
 	//virtual bool collideWith(Entity *other) = 0;
 
 	//Enemy1 sera Enemy (clase base enemy)
-	virtual bool collideWith(Enemy1 *other) = 0;
+	virtual bool collideWith(Enemy *other) = 0;
 
 	// Key/Clock podrian tener super clase item con un metodo de pickUp(Player*) o algo pero mucho refator tbh
 

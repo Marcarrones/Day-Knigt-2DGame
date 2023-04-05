@@ -5,17 +5,19 @@
 void Entity::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 {
 	if (sprite == NULL) {
-		sprite = sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 0.25), &spritesheet, &shaderProgram);
+		sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 0.25), &spritesheet, &shaderProgram);
 	}
-	posEntity = glm::ivec2(0, 0);
+	//posEntity = glm::ivec2(0, 0);
 
 	tileMapDispl = tileMapPos;
 	collider.init(&posEntity, 32, 32, false, &shaderProgram);
-
+	
+	initSprite(shaderProgram);
 }
 
 void Entity::update(int deltaTime)
 {
+
 }
 
 void Entity::render()
@@ -24,11 +26,7 @@ void Entity::render()
 	collider.render();
 }
 
-/*
-bool Entity::collideBy(ICollider *collider) {
-	return collider->collideWith(this);
-}	
-*/
+
 void Entity::setTileMap(TileMap * tileMap)
 {
 	map = tileMap;

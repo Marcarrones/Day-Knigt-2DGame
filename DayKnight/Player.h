@@ -5,7 +5,7 @@
 #include "Sprite.h"
 #include "TileMap.h"
 #include "Entity.h"
-#include "Enemy1.h"
+#include "Enemy.h"
 
 // Player is basically a Sprite that represents the player. As such it has
 // all properties it needs to track its movement, jumping, and collisions.
@@ -26,7 +26,7 @@ public:
 	virtual bool collidedBy(ICollider * collider) override;
 	
 	// Implementacion ICollider
-	virtual bool collideWith(Enemy1 *other) override;
+	virtual bool collideWith(Enemy *other) override;
 	virtual bool collideWith(Key *other) override;
 	virtual bool collideWith(Clock *other) override;
 	virtual bool collideWith(StartEndDoor *other) override;

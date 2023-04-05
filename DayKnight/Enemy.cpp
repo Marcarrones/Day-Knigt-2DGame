@@ -1,4 +1,4 @@
-#include "Enemy1.h"
+#include "Enemy.h"
 
 #define FALL_STEP 4
 
@@ -8,16 +8,14 @@ enum EnemyAnims
 };
 
 
-//Enemy1::Enemy1() : Entity() { }
-
-void Enemy1::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
+void Enemy::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 {
 	Entity::init(tileMapPos, shaderProgram);
 
 	initSprite(shaderProgram);
 }
 
-void Enemy1::initSprite(ShaderProgram &shaderProgram)
+void Enemy::initSprite(ShaderProgram &shaderProgram)
 {
 	spritesheet.loadFromFile("images/bub.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 0.25), &spritesheet, &shaderProgram);
@@ -38,7 +36,7 @@ void Enemy1::initSprite(ShaderProgram &shaderProgram)
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
 
-void Enemy1::update(int deltaTime) {
+void Enemy::update(int deltaTime) {
 	sprite->update(deltaTime);
 
 	Edge edge = map->checkEdge(posEntity, glm::ivec2(32, 32));
@@ -64,26 +62,12 @@ void Enemy1::update(int deltaTime) {
 }
 
 
-void Enemy1::changeDirection() { 
+void Enemy::changeDirection() { 
 	movementDir *= -1;
 	sprite->changeAnimation(sprite->animation() == MOVE_LEFT ? MOVE_RIGHT : MOVE_LEFT);
 }
 
-/*void Enemy1::render()
-{
-	Entity::render();
-	//sprite->render();
-}*/
-
-void Enemy1::setTileMap(TileMap *tileMap)
+void Enemy::setTileMap(TileMap *tileMap)
 {
 	map = tileMap;
 }
-
-/*
-void Enemy1::setPosition(const glm::vec2 &pos)
-{
-	posEntity = glm::ivec2(pos.x,pos.y);
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
-}
-*/

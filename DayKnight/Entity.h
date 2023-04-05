@@ -31,6 +31,7 @@ public:
 	glm::ivec2* getPos() { return &posEntity;  };
 
 protected:
+	virtual void initSprite(ShaderProgram &shaderProgram) = 0;
 	Sprite *sprite;
 	Texture spritesheet;
 	TileMap *map;

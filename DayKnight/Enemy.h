@@ -1,12 +1,12 @@
-#ifndef _ENEMY1_
-#define _ENEMY1_
+#ifndef _ENEMY_
+#define _ENEMY_
 
 #include "Entity.h"
 
-class Enemy1 : public Entity
+class Enemy : public Entity
 {
 public:
-	//Enemy1();
+
 
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	

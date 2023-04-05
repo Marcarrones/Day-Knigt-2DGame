@@ -57,7 +57,7 @@ bool Player::collidedBy(ICollider *collider) {
 	return false;
 }
 
-bool Player::collideWith(Enemy1 *other) {
+bool Player::collideWith(Enemy *other) {
 	if (collider.CheckColission(other->collider)) {
 		damagePlayer();
 		return true;

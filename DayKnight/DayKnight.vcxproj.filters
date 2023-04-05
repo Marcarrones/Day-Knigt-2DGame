@@ -40,9 +40,6 @@
     <ClCompile Include="CollisionBox.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Enemy1.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -62,6 +59,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Clock.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -111,9 +111,6 @@
     <ClInclude Include="CollisionBox.h">
       <Filter>headers</Filter>
     </ClInclude>
-    <ClInclude Include="Enemy1.h">
-      <Filter>headers</Filter>
-    </ClInclude>
     <ClInclude Include="MenuSuperior.h">
       <Filter>headers</Filter>
     </ClInclude>
@@ -133,6 +130,9 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="ICollidable.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

@@ -6,7 +6,7 @@
 #include "ShaderProgram.h"
 #include "TileMap.h"
 #include "Player.h"
-#include "Enemy1.h"
+#include "Enemy.h"
 #include "MenuSuperior.h"
 #include "StartEndDoor.h"
 #include "Key.h"
