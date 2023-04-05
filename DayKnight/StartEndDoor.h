@@ -1,17 +1,14 @@
 #ifndef _START_END_DOOR_INCLUDE
 #define _START_END_DOOR_INCLUDE
 
+#include "Entity.h"
 
-#include "Sprite.h"
-#include "TileMap.h"
-
-
-class StartEndDoor
+class StartEndDoor:public Entity
 {
 
 public:
 	~StartEndDoor();
-	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram, glm::ivec2 pos, int state);
+	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram);
 	void update(int deltaTime);
 	void render();
 
@@ -22,6 +19,8 @@ public:
 	glm::ivec2 getPosition();
 	bool isOpenClose();
 private:
+	void initSprite(ShaderProgram &shaderProgram);
+
 	glm::ivec2 tileMapDispl, posDoor;
 	Texture spritesheet;
 	Sprite* sprite;

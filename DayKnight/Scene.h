@@ -9,6 +9,7 @@
 #include "Enemy1.h"
 #include "MenuSuperior.h"
 #include "StartEndDoor.h"
+#include "Key.h"
 #define SCREEN_X 32
 #define SCREEN_Y 16
 
@@ -65,6 +66,7 @@ private:
 	Level level, screen;
 	Texture spritesheetBackground;
 	Sprite *background;
+	Key *key;
 
 	MenuSuperior* menuSuperior;
 	StartEndDoor* startEndDoor;

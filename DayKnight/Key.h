@@ -1,28 +1,30 @@
-#ifndef _ENEMY1_
-#define _ENEMY1_
+#ifndef _KEY_INCLUDE
+#define _KEY_INCLUDE
 
 #include "Entity.h"
 
-class Enemy1 : public Entity
+class Key: public Entity
 {
 public:
-	Enemy1();
+	Key();
 
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
-	
+
 	virtual void update(int deltaTime);
-	void changeDirection();
 	void render();
-
 	void setTileMap(TileMap *tileMap);
-	//void setPosition(const glm::vec2 &pos);
+	/*
+	Para no mostrar la llave deja de hacer render de la llave*/
+	void show();
+	bool isShow();
+	bool isPicked();
 
-	int enemySpeed = 1;
-
+	~Key();
 private:
 	void initSprite(ShaderProgram &shaderProgram);
 
-	int movementDir = 1; // 1 -> Right : -1 -> Left
+	bool showing;
+	bool pick;
 };
 
-#endif /// _ENEMY1_
+#endif
