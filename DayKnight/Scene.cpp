@@ -51,8 +51,7 @@ void Scene::restart()
 {
 	changelevel(level);
 	return;
-    
-	currentTime = 0.0f;
+    /*	currentTime = 0.0f;
 	menuSuperior = new MenuSuperior();
 	menuSuperior->init(glm::ivec2(SCREEN_X + 16, SCREEN_Y + 32), texProgram);
 	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
@@ -68,6 +67,7 @@ void Scene::restart()
 	//enemy = new Enemy1();
 	//enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 	//enemy->setPosition(glm::vec2(100, 50));
+	*/
 }
 
 void Scene::finishLevel()
