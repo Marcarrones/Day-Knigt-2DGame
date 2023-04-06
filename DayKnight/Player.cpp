@@ -13,7 +13,7 @@
 
 enum PlayerAnims
 {
-	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT
+	STAND_LEFT, STAND_RIGHT, MOVE_LEFT, MOVE_RIGHT, AIRBOURNE
 };
 
 void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
@@ -28,29 +28,36 @@ void Player::init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram)
 
 void Player::initSprite(ShaderProgram &shaderProgram)
 {
-	spritesheet.loadFromFile("images/bub.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheet.loadFromFile("images/player.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 0.25), &spritesheet, &shaderProgram);
-	sprite->setNumberAnimations(4);
+	sprite->setNumberAnimations(5);
 
 	sprite->setAnimationSpeed(STAND_LEFT, 8);
-	sprite->addKeyframe(STAND_LEFT, glm::vec2(0.f, 0.f));
+	sprite->addKeyframe(STAND_LEFT, glm::vec2(0.f, 0.25f));
 
 	sprite->setAnimationSpeed(STAND_RIGHT, 8);
-	sprite->addKeyframe(STAND_RIGHT, glm::vec2(0.25f, 0.f));
+	sprite->addKeyframe(STAND_RIGHT, glm::vec2(0.f, 0.f));
 
 	sprite->setAnimationSpeed(MOVE_LEFT, 8);
-	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.f, 0.f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.25f, 0.25f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.5f, 0.25f));
+	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.75f, 0.25f));
 	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.f, 0.25f));
-	sprite->addKeyframe(MOVE_LEFT, glm::vec2(0.f, 0.5f));
 
 	sprite->setAnimationSpeed(MOVE_RIGHT, 8);
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.25, 0.f));
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.25, 0.25f));
-	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.25, 0.5f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.25f, 0.f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.75f, 0.f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.5f, 0.f));
+	sprite->addKeyframe(MOVE_RIGHT, glm::vec2(0.0f, 0.f));
+
+	sprite->setAnimationSpeed(AIRBOURNE, 8);
+	sprite->addKeyframe(AIRBOURNE, glm::vec2(.25f, .75f));
 
 	sprite->changeAnimation(0);
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
+
+#pragma region Collisions
 
 bool Player::collidedBy(ICollider *collider) {
 	// Es "impossible" que un collider (Player) colisione con esta instancia de Entity (AKA PLAYER)
@@ -80,12 +87,14 @@ bool Player::collideWith(StartEndDoor * other)
 	return false;
 }
 
+#pragma endregion
 
 
 void Player::update(int deltaTime)
 {
-	int lookingRight = 1;
+
 	if (sprite->animation() == MOVE_LEFT || sprite->animation() == STAND_LEFT) lookingRight = -1;
+	if (sprite->animation() == MOVE_RIGHT || sprite->animation() == STAND_RIGHT) lookingRight = 1;
 	sprite->update(deltaTime);
 	if (Game::instance().getSpecialKey(GLUT_KEY_LEFT))
 	{
@@ -122,7 +131,7 @@ void Player::update(int deltaTime)
 	if (bJumping)
 	{
 		angle += deltaTime;
-
+		sprite->changeAnimation(AIRBOURNE);
 		jumpAngle += JUMP_ANGLE_STEP;
 		if (jumpAngle == 180)
 		{
@@ -150,6 +159,7 @@ void Player::update(int deltaTime)
 				startY = posEntity.y;
 			}
 		}
+		else sprite->changeAnimation(AIRBOURNE);
 	}
 	//position->SetPos(posPlayer.x, posPlayer.y);
 	paintTiles();

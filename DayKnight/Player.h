@@ -50,6 +50,7 @@ private:
 	bool immune;
 	float angle;
 	int jumpAngle, startY;
+	int lookingRight = 1;
 
 	void initSprite(ShaderProgram &shaderProgram);
 	void paintTiles();
