@@ -5,6 +5,7 @@
 #include "Game.h"
 #include "Text.h"
 #include <string.h>
+#include "SkeletonEnemy.h"
 
 // HACER GLOBALES?
 //#define SCREEN_X 32
@@ -237,7 +238,7 @@ void Scene::initEntities() {
 
 	positions = map->enemy1Pos;
 	while(!positions.empty()) {
-		Enemy* n = new Enemy(); // Cambiar a implementacion de Enemy1/Skeleton
+		Enemy* n = new SkeletonEnemy(); // Cambiar a implementacion de Enemy1/Skeleton
 
 		n->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
 		n->setPosition(positions.top());
