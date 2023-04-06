@@ -4,12 +4,7 @@
 #include <vector>
 #include "TileMap.h"
 
-
 using namespace std;
-
-int PAINTABLE_TILE = 1;
-int PAINTED_TILE = 2;
-
 
 
 TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
@@ -18,7 +13,6 @@ TileMap *TileMap::createTileMap(const string &levelFile, const glm::vec2 &minCoo
 
 	return map;
 }
-
 
 TileMap::TileMap(const string &levelFile, const glm::vec2 &minCoords, ShaderProgram &program)
 {
@@ -153,7 +147,7 @@ void TileMap::setPositions(char tile, const glm::ivec2 &entityPos) {
 		enemy2Pos.push(entityPos);
 		break;
 	case 't':
-		enemy3Pos.push(entityPos);
+		enemy3Pos.push(entityPos + glm::ivec2(0,16) );
 		break;
 	}
 	return;
@@ -290,6 +284,26 @@ bool TileMap::collisionMoveDown(const glm::ivec2 &pos, const glm::ivec2 &size, i
 				*posY = tileSize * y - size.y;
 				return true;
 			}
+		}
+	}
+
+	return false;
+}
+
+bool TileMap::collisionMoveUp(const glm::ivec2 &pos, const glm::ivec2 &size, int *posY) const
+{
+	int x0, x1, y;
+
+	x0 = (pos.x + 1) / tileSize;
+	x1 = (pos.x + size.x - 2) / tileSize;
+	y = (pos.y) / tileSize;
+	for (int x = x0; x <= x1; x++)
+	{
+		if (map[y*mapSize.x + x] != 0)
+		{	
+			*posY = (y+1) * tileSize + 1;
+			return true;
+
 		}
 	}
 

@@ -10,13 +10,13 @@ CollisionBox::CollisionBox()	{ }
 
 CollisionBox::~CollisionBox()	{	}
 
-void CollisionBox::init(glm::ivec2 *position, int height, int width, bool isStatic, ShaderProgram *shaderProgram)
+void CollisionBox::init(glm::ivec2 *position, int height, int width, ShaderProgram *shaderProgram)
 {
 	_position = position;
 	_height = height;
 	_width = width;
-	_isStatic = isStatic;
-	_debugBox = Sprite::createSprite(glm::vec2(height, width),glm::vec2(0,0), NULL, shaderProgram);
+	t.createEmptyTexture(width, height);
+	_debugBox = Sprite::createSprite(glm::vec2(height, width),glm::vec2(0,0), &t, shaderProgram);
 }
 
 void CollisionBox::render() {
