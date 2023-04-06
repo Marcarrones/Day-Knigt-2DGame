@@ -64,6 +64,9 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="SkeletonEnemy.cpp" />
+    <ClCompile Include="VampireEnemy.cpp" />
+    <ClCompile Include="SkullEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimKeyframes.h">
@@ -135,6 +138,9 @@
     <ClInclude Include="Enemy.h">
       <Filter>headers</Filter>
     </ClInclude>
+    <ClInclude Include="SkeletonEnemy.h" />
+    <ClInclude Include="VampireEnemy.h" />
+    <ClInclude Include="SkullEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="headers">
