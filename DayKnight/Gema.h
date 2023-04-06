@@ -1,27 +1,25 @@
-#ifndef _CLOCK_INCLUDE
-#define _CLOCK_INCLUDE
+#ifndef _GEMA_INCLUDE
+#define _GEMA_INCLUDE
 
 #include "Entity.h"
-class Clock: public Entity
+class Gema: public Entity
 {
 public:
-	Clock();
+	Gema();
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	void update(int deltaTime) override;
 	void render();
 	virtual bool collidedBy(ICollider *collider) override
-		{ return collider->collideWith(this); }
+	{
+		return collider->collideWith(this);
+	}
 
 	void setTileMap(TileMap *tileMap);
-	void StopTime();
-	bool isStopTime();
 	void pick();
 	bool ispicked();
-	~Clock();
-
+	~Gema();
 private:
 	bool picked;
-	float timeToStop;
 	void initSprite(ShaderProgram &shaderProgram);
 };
 

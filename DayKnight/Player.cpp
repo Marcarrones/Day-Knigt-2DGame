@@ -68,17 +68,17 @@ bool Player::collideWith(Enemy1 *other) {
 
 bool Player::collideWith(Key * other)
 {
-	return false;
+	return collider.CheckColission(other->collider);
 }
 
 bool Player::collideWith(Clock * other)
 {
-	return false;
+	return collider.CheckColission(other->collider);
 }
 
 bool Player::collideWith(StartEndDoor * other)
 {
-	return false;
+	return collider.CheckColission(other->collider);
 }
 
 
@@ -132,7 +132,7 @@ void Player::update(int deltaTime)
 		}
 		else
 		{
-			posEntity.y = int(startY - 96 * sin(3.14159f * jumpAngle / 180.f));
+			posEntity.y = int(startY - 48 * sin(3.14159f * jumpAngle / 180.f));
 			if(jumpAngle > 90)
 				bJumping = !map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y);
 		}
@@ -189,7 +189,7 @@ bool Player::isImmune()
 
 void Player::changeImmune()
 {
-	this->immune = !this->immune;
+	immune = !immune;
 }
 
 

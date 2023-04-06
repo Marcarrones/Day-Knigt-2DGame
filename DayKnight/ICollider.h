@@ -7,7 +7,8 @@ class Enemy1;
 class Key;
 class Clock;
 class StartEndDoor;
-
+class Gema;
+class Health;
 
 
 class ICollider
@@ -26,5 +27,9 @@ public:
 	virtual bool collideWith(Clock *other) = 0;
 
 	virtual bool collideWith(StartEndDoor *other) = 0;
+
+	virtual bool collideWith(Gema *other) = 0;
+
+	virtual bool collideWith(Health *other) = 0;
 };
 #endif // !_ICOLLIDER
