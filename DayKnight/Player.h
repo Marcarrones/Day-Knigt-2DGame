@@ -18,8 +18,9 @@ public:
 	//Player();
 
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
+	
 	void update(int deltaTime) override;
-	void render();
+	//void render();
 	
 	//Necesario pero inutil (ICollidable de Entity)
 	virtual bool collidedBy(ICollider * collider) override;
@@ -30,7 +31,9 @@ public:
 	virtual bool collideWith(Clock *other) override;
 	virtual bool collideWith(StartEndDoor *other) override;
 
-	//void setTileMap(TileMap *tileMap);
+	// Damages player (--lives; resetPos)
+	void damagePlayer();
+
 	void setPosition(const glm::vec2 &pos);
 	
 	int getlive();
@@ -43,16 +46,13 @@ public:
 	
 private:
 	bool bJumping;
-	//glm::ivec2 tileMapDispl, posPlayer;
-	float angle;
-	int jumpAngle, startY;
-	//Texture spritesheet;
-	//Sprite *sprite;
-	//TileMap *map;
-	void initSprite(ShaderProgram &shaderProgram);
-	void paintTiles();
 	int live;
 	bool immune;
+	float angle;
+	int jumpAngle, startY;
+
+	void initSprite(ShaderProgram &shaderProgram);
+	void paintTiles();
 };
 
 
