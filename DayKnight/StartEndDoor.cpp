@@ -11,6 +11,10 @@ enum DoorAnims
 	CLOSED, OPENED
 };
 
+StartEndDoor::StartEndDoor() {
+
+}
+
 StartEndDoor::~StartEndDoor() {
 	if (sprite != NULL)
 		delete sprite;

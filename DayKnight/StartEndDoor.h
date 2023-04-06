@@ -7,6 +7,7 @@ class StartEndDoor:public Entity
 {
 
 public:
+	StartEndDoor();
 	~StartEndDoor();
 	void init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram);
 	void update(int deltaTime) override;
