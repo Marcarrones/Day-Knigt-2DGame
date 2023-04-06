@@ -120,27 +120,44 @@ void Scene::update(int deltaTime)
 	if (Game::instance().getKey(105)) {
 		player->changeImmune();
 	}
+	
+	if (player->collideWith(clock)) {
+		clock->pick();
+		clock->StopTime();
+	}
+
 	for (int i = 0; i < entites.size(); i++) {
 		Entity* e = entites[i];
 
-		e->update(deltaTime);
+		if (!clock->isStopTime()) {
+			e->update(deltaTime);
+		}
+	
 
-		e->collidedBy(player);
+		// TODO: Si añades nuevos enemigos para que funcione la immnunidad 
+		if (!player->isImmune()) {
+			e->collidedBy(player);
+		}
+		
 	}
+
 
 	if (player->getlive() < 0) {
 		// SE MAMO
 		restart();
 	}
 	// Check if map cleared
-	if (map->remainingTiles() <= 0) {
+	if (map->remainingTiles() <= 0 || inScreenKey == true) {
 		// Visisbilidad llave
-		startEndDoor->open();
+		key->show();
+	
 		//finishLevel();
 	}
 
 	// Abrir puerta
-	if (player->collideWith(key)) startEndDoor->open();
+	if (player->collideWith(key) && inScreenKey == true) {
+		startEndDoor->open();
+	}
 	
 
 	if (startEndDoor->isOpenClose()) {
@@ -211,8 +228,10 @@ void Scene::renderEntities() {
 		key->render();
 	}
 
+	if (!clock->ispicked()) {
+		clock->render();
+	}
 
-	clock->render();
 }
 
 #pragma endregion

@@ -64,6 +64,12 @@
     <ClCompile Include="Clock.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Gema.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AnimKeyframes.h">
@@ -133,6 +139,12 @@
       <Filter>headers</Filter>
     </ClInclude>
     <ClInclude Include="ICollidable.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Gema.h">
+      <Filter>headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
       <Filter>headers</Filter>
     </ClInclude>
   </ItemGroup>

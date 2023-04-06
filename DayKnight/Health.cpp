@@ -1,72 +1,55 @@
-#include "Clock.h"
+#include "Health.h"
+
 
 enum {
 	SHOW,
 	PICKED
 };
 
-Clock::Clock()
+Health::Health()
 {
 }
 
-void Clock::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
+void Health::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 {
 	Entity::init(tileMapPos, shaderProgram);
 	initSprite(shaderProgram);
-	timeToStop = 0.0;
 	picked = false;
 }
 
-Clock::~Clock()
-{
-}
-
-void Clock::update(int deltaTime)
+void Health::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	if (timeToStop > 0.0) {
-		timeToStop -= deltaTime;
-	}
-	else {
-		timeToStop = 0.0;
-	}
 }
 
-void Clock::render()
+void Health::render()
 {
 	Entity::render();
 }
 
-void Clock::setTileMap(TileMap * tileMap)
+
+void Health::setTileMap(TileMap * tileMap)
 {
 	map = tileMap;
 }
 
-void Clock::StopTime()
+void Health::pick()
 {
-	timeToStop = 5000.0f;
-}
-
-bool Clock::isStopTime()
-{
-	return timeToStop != 0.0;
-}
-
-void Clock::pick()
-{
-	sprite->changeAnimation(PICKED);
 	picked = true;
 }
 
-bool Clock::ispicked()
+bool Health::ispicked()
 {
 	return picked;
 }
 
-
-void Clock::initSprite(ShaderProgram & shaderProgram)
+Health::~Health()
 {
-	spritesheet.loadFromFile("images/Objetos/Clock.png", TEXTURE_PIXEL_FORMAT_RGBA);
+}
+
+void Health::initSprite(ShaderProgram & shaderProgram)
+{
+	spritesheet.loadFromFile("images/Objetos/VitalityPotion.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 1), &spritesheet, &shaderProgram);
 
 	sprite->setNumberAnimations(2);
@@ -79,6 +62,7 @@ void Clock::initSprite(ShaderProgram & shaderProgram)
 	sprite->addKeyframe(PICKED, glm::vec2(0.f, 0.f));
 	sprite->addKeyframe(PICKED, glm::vec2(0.25f, 0.f));
 	sprite->addKeyframe(PICKED, glm::vec2(0.5f, 0.f));
+
 
 	sprite->changeAnimation(SHOW);
 	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
