@@ -2,7 +2,6 @@
 #define _ENTITY_
 
 #include "Sprite.h"
-//#include "Position.h"
 #include "CollisionBox.h"
 #include "TileMap.h"
 #include "ICollidable.h"
@@ -17,7 +16,7 @@ public:
 
 	//Entity();
 
-	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
+	virtual void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	
 	virtual void update(int deltaTime);
 	void render();
