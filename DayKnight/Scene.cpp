@@ -22,7 +22,7 @@ Scene::Scene()
 	map = NULL;
 	player = NULL;
 	menuSuperior = NULL;
-	startEndDoor = NULL;
+	
 
 }
 
@@ -101,7 +101,7 @@ void Scene::update(int deltaTime)
 	menuSuperior->update(deltaTime);
 	menuSuperior->updateTime(cuentaAtras/1000);
 	menuSuperior->setPoints(playerPoints);
-	
+	startEndDoor->update(deltaTime);
 	// MOVER A GAME
 	if (Game::instance().getKey(49)) {
 		changelevel(Level01);
@@ -127,6 +127,10 @@ void Scene::update(int deltaTime)
 	if (player->collideWith(clock)) {
 		clock->pick();
 		clock->StopTime();
+	}
+
+	if (Game::instance().getKey(111)) {
+		startEndDoor->open();
 	}
 
 	for (int i = 0; i < entites.size(); i++) {
@@ -162,13 +166,11 @@ void Scene::update(int deltaTime)
 	}
 	
 
-	if (startEndDoor->isOpenClose()) {
+	if (startEndDoor->isOpenClose() && player->collideWith(startEndDoor)) {
 		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
-		if (player->collideWith(startEndDoor)){
+
 			playerPoints += cuentaAtras * 100;
 			finishLevel();
-
-		}
 		
 	}
 
@@ -186,10 +188,13 @@ void Scene::update(int deltaTime)
 		pickGem = true;
 	}
 
+	// Para puntos
 	int tmpPoint = painTiles - map->remainingTiles();
 	painTiles = map->remainingTiles();
 	playerPoints += tmpPoint*10;
-	startEndDoor->update(deltaTime);
+
+
+
 	key->update(deltaTime);
 	clock->update(deltaTime);
 	gema->update(deltaTime);
@@ -248,7 +253,7 @@ void Scene::renderEntities() {
 	}
 	startEndDoor->render();
 
-	// TODO: Mirar si todo el suelo est� pintado 
+	
 	if (inScreenKey){
 		key->render();
 	}
@@ -305,12 +310,11 @@ void Scene::initEntities() {
 
 
 	startEndDoor = new StartEndDoor();
-	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	glm::vec2 exitPos = map->exitPos;
-	exitPos.y += 16;
-	exitPos.x += 16;
+	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram); ;
+
+
 	// TODO: Revisar esto porque si no se a�ade 16 de altura se queda arriba
-	startEndDoor->setPosition(exitPos);
+	startEndDoor->setPosition(map->exitPos);
 	startEndDoor->setTileMap(map);
 
 

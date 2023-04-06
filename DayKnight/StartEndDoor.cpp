@@ -25,7 +25,7 @@ void StartEndDoor::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgr
 void StartEndDoor::update(int deltaTime)
 {
 	sprite->update(deltaTime);
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posDoor.x), float(tileMapDispl.y + posDoor.y)));
+	//sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
 
 void StartEndDoor::render()
@@ -40,13 +40,10 @@ void StartEndDoor::setTileMap(TileMap* tileMap)
 
 void StartEndDoor::setPosition(const glm::vec2& pos)
 {
-	posDoor = pos;
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + posDoor.x), float(tileMapDispl.y + posDoor.y)));
+
+	sprite->setPosition(glm::vec2(float(tileMapDispl.x + pos.x + 16), float(tileMapDispl.y + pos.y + 16)));
 }
 
-glm::ivec2 StartEndDoor::getPosition() {
-	return posDoor;
-}
 
 bool StartEndDoor::isOpenClose()
 {

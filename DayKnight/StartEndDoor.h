@@ -19,15 +19,9 @@ public:
 		{ return collider->collideWith(this); }	
 	void open();
 	void close();
-	glm::ivec2 getPosition();
 	bool isOpenClose();
 private:
 	void initSprite(ShaderProgram &shaderProgram);
-
-	glm::ivec2 tileMapDispl, posDoor;
-	Texture spritesheet;
-	Sprite* sprite;
-	TileMap* map;
 	bool isOpen;
 };
 
