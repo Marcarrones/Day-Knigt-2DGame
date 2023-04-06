@@ -80,6 +80,16 @@ bool Player::collideWith(StartEndDoor * other)
 	return collider.CheckColission(other->collider);
 }
 
+bool Player::collideWith(Gema * other)
+{
+	return false;
+}
+
+bool Player::collideWith(Health * other)
+{
+	return false;
+}
+
 
 
 void Player::update(int deltaTime)

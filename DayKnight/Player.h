@@ -30,6 +30,8 @@ public:
 	virtual bool collideWith(Key *other) override;
 	virtual bool collideWith(Clock *other) override;
 	virtual bool collideWith(StartEndDoor *other) override;
+	virtual bool collideWith(Gema *other) override;
+	virtual bool collideWith(Health *other) override;
 
 	// Damages player (--lives; resetPos)
 	void damagePlayer();

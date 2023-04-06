@@ -32,4 +32,5 @@ public:
 
 	virtual bool collideWith(Health *other) = 0;
 };
+
 #endif // !_ICOLLIDER

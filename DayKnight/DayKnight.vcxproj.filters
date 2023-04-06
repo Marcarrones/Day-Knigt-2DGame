@@ -64,10 +64,10 @@
     <ClCompile Include="Clock.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Gema.cpp">
+    <ClCompile Include="Health.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Health.cpp">
+    <ClCompile Include="Gema.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
