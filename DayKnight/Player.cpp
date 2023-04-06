@@ -158,6 +158,8 @@ void Player::update(int deltaTime)
 				jumpAngle = 0;
 				startY = posEntity.y;
 			}
+			if (sprite->animation() == AIRBOURNE)
+			(lookingRight == 1) ? sprite->changeAnimation(STAND_RIGHT) : sprite->changeAnimation(STAND_LEFT);
 		}
 		else sprite->changeAnimation(AIRBOURNE);
 	}
