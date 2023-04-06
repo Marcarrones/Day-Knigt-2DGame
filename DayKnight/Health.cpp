@@ -12,7 +12,8 @@ Health::Health()
 
 void Health::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 {
-	Entity::init(tileMapPos, shaderProgram);
+	tileMapDispl = tileMapPos;
+	collider.init(&posEntity, 16,16, &shaderProgram);
 	initSprite(shaderProgram);
 	picked = false;
 }
@@ -50,7 +51,7 @@ Health::~Health()
 void Health::initSprite(ShaderProgram & shaderProgram)
 {
 	spritesheet.loadFromFile("images/Objetos/VitalityPotion.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 1), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(16,16), glm::vec2(0.25, 1), &spritesheet, &shaderProgram);
 
 	sprite->setNumberAnimations(2);
 

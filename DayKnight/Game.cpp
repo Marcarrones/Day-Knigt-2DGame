@@ -21,6 +21,27 @@ void Game::init()
 
 bool Game::update(int deltaTime)
 {
+	if (Game::instance().getKey(49)) {
+		scene.changelevel(Level01);
+
+	}
+	if (Game::instance().getKey(50)) {
+		scene.changelevel(Level02);
+
+	}
+
+	if (Game::instance().getKey(51)) {
+		scene.changelevel(Level03);
+	}
+
+	if (Game::instance().getKey(107)) {
+		scene.showKey();
+	}
+
+	if (Game::instance().getKey(105)) {
+		scene.setGodModeOn();
+	}
+
 	switch (currentScreen) 
 	{
 	case MAIN_MENU:

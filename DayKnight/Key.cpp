@@ -8,7 +8,8 @@ enum {
 
 void Key::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 {
-	Entity::init(tileMapPos, shaderProgram);
+	tileMapDispl = tileMapPos;
+	collider.init(&posEntity, 16, 16, &shaderProgram);
 	initSprite(shaderProgram);
 }
 
@@ -19,18 +20,21 @@ void Key::update(int deltaTime)
 
 void Key::render()
 {
+	if ((showing && !pick) || !pick )
 	Entity::render();
 }
 
-void Key::setTileMap(TileMap * tileMap)
-{
-	map = tileMap;
-}
 
 void Key::show()
 {
 	//Para no mostrar deja de hacer el render()
 	sprite->changeAnimation(SHOW);
+	showing = true;
+}
+
+void Key::pickUp() {
+	sprite->changeAnimation(PICKED);
+	pick = true;
 }
 
 bool Key::isPicked()
@@ -39,14 +43,10 @@ bool Key::isPicked()
 }
 
 
-Key::~Key()
-{
-}
-
 void Key::initSprite(ShaderProgram & shaderProgram)
 {
 	spritesheet.loadFromFile("images/Objetos/Key.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25,1 ), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(16,16), glm::vec2(0.25,1 ), &spritesheet, &shaderProgram);
 
 	sprite->setNumberAnimations(2);
 

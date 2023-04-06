@@ -74,30 +74,35 @@ bool Player::collideWith(Enemy *other) {
 
 bool Player::collideWith(Key * other)
 {
-	return collider.CheckColission(other->collider);
+	if (!other->canBePicked()) return false;
+	if (collider.CheckColission(other->collider)) {
+		other->pickUp();
+		return true;
+	}
 }
 
 bool Player::collideWith(Clock * other)
 {
+	if (other->ispicked()) return false;
 	return collider.CheckColission(other->collider);
 }
 
 bool Player::collideWith(StartEndDoor * other)
 {
-	return collider.CheckColission(other->collider);
+	return collider.CheckColission(other->collider) && other->isOpen();
 }
 
 bool Player::collideWith(Gema * other)
 {
 	return collider.CheckColission(other->collider);
 }
-#pragma endregion
 
 bool Player::collideWith(Health * other)
 {
 	return collider.CheckColission(other->collider);
 }
 
+#pragma endregion
 
 
 void Player::update(int deltaTime)

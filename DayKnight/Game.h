@@ -44,6 +44,8 @@ public:
 	bool getKey(int key) const;
 	bool getSpecialKey(int key) const;
 
+	static const bool debugMode = false;
+
 private:
 	bool bPlay;                       // Continue to play game?
 	Scene scene;                      // Scene to render

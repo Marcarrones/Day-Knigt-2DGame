@@ -5,26 +5,10 @@
 #include "StartEndDoor.h"
 #include "Game.h"
 
-
 enum DoorAnims
 {
 	CLOSED, OPENED
 };
-
-StartEndDoor::StartEndDoor() {
-
-}
-
-StartEndDoor::~StartEndDoor() {
-	if (sprite != NULL)
-		delete sprite;
-}
-
-void StartEndDoor::init(const glm::ivec2& tileMapPos, ShaderProgram& shaderProgram)
-{
-	initSprite(shaderProgram);
-	
-}
 
 void StartEndDoor::update(int deltaTime)
 {
@@ -32,26 +16,9 @@ void StartEndDoor::update(int deltaTime)
 	//sprite->setPosition(glm::vec2(float(tileMapDispl.x + posEntity.x), float(tileMapDispl.y + posEntity.y)));
 }
 
-void StartEndDoor::render()
+bool StartEndDoor::isOpen()
 {
-	sprite->render();
-}
-
-void StartEndDoor::setTileMap(TileMap* tileMap)
-{
-	map = tileMap;
-}
-
-void StartEndDoor::setPosition(const glm::vec2& pos)
-{
-
-	sprite->setPosition(glm::vec2(float(tileMapDispl.x + pos.x + 16), float(tileMapDispl.y + pos.y + 16)));
-}
-
-
-bool StartEndDoor::isOpenClose()
-{
-	return isOpen;
+	return _isOpen;
 }
 
 void StartEndDoor::initSprite(ShaderProgram &shaderProgram)
@@ -68,17 +35,17 @@ void StartEndDoor::initSprite(ShaderProgram &shaderProgram)
 	sprite->addKeyframe(OPENED, glm::vec2(0.f, 0.f));
 
 	sprite->changeAnimation(CLOSED);
-	isOpen = CLOSED;
+	_isOpen = false;
 	//sprite->setPosition(glm::vec2(float(tileMapDispl.x - posDoor.x), float(tileMapDispl.y - posDoor.y)));
 	//sprite->setScale(glm::vec3(2.f, 2.f, 0.f));
 }
 
 void StartEndDoor::open() {
 	sprite->changeAnimation(OPENED);
-	isOpen = OPENED;
+	_isOpen = true;
 }
 
 void StartEndDoor::close() {
 	sprite->changeAnimation(CLOSED);
-	isOpen = CLOSED;
+	_isOpen = false;
 }

@@ -45,7 +45,6 @@ void Scene::init()
 	
 	changelevel(Level01);
 	initSpriteBackground();
-	inScreenKey = false;
 	
 }
 
@@ -86,27 +85,6 @@ void Scene::update(int deltaTime)
 	menuSuperior->updateTime(cuentaAtras/1000);
 	menuSuperior->setPoints(playerPoints);
 	startEndDoor->update(deltaTime);
-	// MOVER A GAME
-	if (Game::instance().getKey(49)) {
-		changelevel(Level01);
-		
-	}
-	if (Game::instance().getKey(50)) {
-		changelevel(Level02);
-		
-	}
-
-	if (Game::instance().getKey(51)) {
-		changelevel(Level03);
-	}
-
-	if (Game::instance().getKey(107)) {
-		showKey();
-	}
-	
-	if (Game::instance().getKey(105)) {
-		player->changeImmune();
-	}
 	
 	if (player->collideWith(clock)) {
 		clock->pick();
@@ -141,21 +119,19 @@ void Scene::update(int deltaTime)
 	if (map->remainingTiles() <= 0 || inScreenKey == true) {
 		// Visisbilidad llave
 		key->show();
-	
+		inScreenKey = true;
 	}
 	
 	// Abrir puerta
 	if (player->collideWith(key) && inScreenKey == true) {
 		startEndDoor->open();
+
 	}
 	
-
-	if (startEndDoor->isOpenClose() && player->collideWith(startEndDoor)) {
-		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
-
-			playerPoints += cuentaAtras * 100;
-			finishLevel();
-		
+	// collideWithDoor ya detecta si esta abierta o no
+	if (player->collideWith(startEndDoor)) {
+		playerPoints += cuentaAtras * 100;
+		finishLevel();
 	}
 
 	if (player->collideWith(health) && !pickHealth) {
@@ -200,9 +176,10 @@ void Scene::changelevel(Level newLevel)
 {
 	level = newLevel;
 	currentTime = 0.0f;
-    cuentaAtras = 60000.0f;
+    cuentaAtras = 120000.0f;
 	map = TileMap::createTileMap("levels/" + levelTxt(newLevel) + ".txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-
+	inScreenKey = false;
+	debugMode = false;
 	initEntities();
 	menuSuperior = new MenuSuperior();
 	menuSuperior->init(glm::ivec2(SCREEN_X + 16, SCREEN_Y + 32), texProgram);
@@ -226,31 +203,38 @@ void Scene::render()
 	menuSuperior->render();
 
 	renderEntities();
-	//enemy->render();
 }
 
 void Scene::renderEntities() {
+	player->showCollision = debugMode;
 	player->render();
 
 	for (int i = 0; i < entites.size(); i++) {
+		entites[i]->showCollision = debugMode;
 		entites[i]->render();
 	}
+
+	startEndDoor->showCollision = debugMode;
 	startEndDoor->render();
 
 	
-	if (inScreenKey){
+	if (inScreenKey && !key->isPicked()){
+		key->showCollision = debugMode;
 		key->render();
 	}
 
 	if (!clock->ispicked()) {
+		clock->showCollision = debugMode;
 		clock->render();
 	}
 
 	if (!gema->ispicked() && !pickGem) {
+		gema->showCollision = debugMode;
 		gema->render();
 	}
 	
 	if (!health->ispicked() && !pickHealth) {
+		health->showCollision = debugMode;
 		health->render();
 	}
 
@@ -320,10 +304,7 @@ void Scene::initEntities() {
 	// Door pos
 
 	startEndDoor = new StartEndDoor();
-	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram); ;
-
-
-	// TODO: Revisar esto porque si no se a�ade 16 de altura se queda arriba
+	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram); 
 	startEndDoor->setPosition(map->exitPos);
 	startEndDoor->setTileMap(map);
 
@@ -406,3 +387,7 @@ void Scene::initSpriteBackground()
 
 #pragma endregion
 
+void Scene::setGodModeOn() {
+	if (!debugMode) player->changeImmune();
+	debugMode = true;
+}

@@ -10,21 +10,24 @@ public:
 	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 
 	void update(int deltaTime) override;
+	
 	void render();
+
 	virtual bool collidedBy(ICollider *collider) override
 		{ return collider->collideWith(this); }
 
-	void setTileMap(TileMap *tileMap);
 	/* Para no mostrar la llave deja de hacer render de la llave*/
 	void show();
-	bool isPicked();
+	void pickUp();
 
-	~Key();
+	bool isPicked();
+	bool canBePicked() { return (showing && !pick); }
+
 private:
 	void initSprite(ShaderProgram &shaderProgram);
 
-	bool showing;
-	bool pick;
+	bool showing = false;
+	bool pick = false;
 };
 
 #endif

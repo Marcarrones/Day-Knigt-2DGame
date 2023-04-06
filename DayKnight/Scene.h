@@ -42,6 +42,7 @@ public:
 	void restart();
 	void finishLevel();
 
+	void setGodModeOn();
 private:
 	void renderEntities();
 
@@ -50,6 +51,7 @@ private:
 	void initEntities();
 	void initShaders();
 	void initSpriteBackground();
+
 
 	string Scene::levelTxt(Level level) {
 		switch (level) {
@@ -84,6 +86,7 @@ private:
 	float cuentaAtras;
 	int playerPoints,painTiles;
 	bool inScreenKey,pickHealth,pickGem;
+	bool debugMode = false;
 };
 
 

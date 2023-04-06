@@ -22,7 +22,7 @@ void Entity::update(int deltaTime)
 void Entity::render()
 {
 	sprite->render();
-	collider.render();
+	if (showCollision) collider.render();
 }
 
 

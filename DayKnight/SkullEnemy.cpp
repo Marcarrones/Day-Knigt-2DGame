@@ -17,15 +17,14 @@ void SkullEnemy::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgr
 void SkullEnemy::update(int deltaTime) {
 	sprite->update(deltaTime);
 
-	Edge edge = map->checkEdge(posEntity, glm::ivec2(32, 32));
-
+	
 	switch (movementDir) {
 	case 1: // Right
-		if (edge == Right || map->collisionMoveRight(posEntity, glm::ivec2(32, 32)))
+		if (map->collisionMoveRight(posEntity, glm::ivec2(16,16)))
 			changeDirection();
 		break;
 	case -1: // Left
-		if (edge == Left || map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)))
+		if (map->collisionMoveLeft(posEntity, glm::ivec2(16,16)))
 			changeDirection();
 		break;
 	}

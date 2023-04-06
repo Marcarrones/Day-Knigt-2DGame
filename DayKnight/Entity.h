@@ -28,6 +28,8 @@ public:
 	
 	void setPosition(const glm::vec2 &pos);
 	glm::ivec2* getPos() { return &posEntity;  };
+	
+	bool showCollision = false;
 
 protected:
 	virtual void initSprite(ShaderProgram &shaderProgram) = 0;

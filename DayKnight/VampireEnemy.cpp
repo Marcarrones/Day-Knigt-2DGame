@@ -124,14 +124,18 @@ void VampireEnemy::vampireUpdate(int deltaTime) {
 
 
 void VampireEnemy::batUpdate(int deltaTime) {
+	
+	if (map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y))
+		vertDirection = -1;
+	else if(map->collisionMoveUp(posEntity, glm::ivec2(32, 32), &posEntity.y))
+		vertDirection = 1;
 
-	if (map->collisionMoveDown(posEntity, glm::ivec2(32, 32), &posEntity.y) 
-	|| map->collisionMoveUp(posEntity, glm::ivec2(32, 32), &posEntity.y))
+	if (map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)) || 
+		map->collisionMoveRight(posEntity, glm::ivec2(32, 32))) {
+		movementDir *= -1;
 		vertDirection *= -1;
+	}
 
-	if (map->collisionMoveLeft(posEntity, glm::ivec2(32, 32)) 
-	|| map->collisionMoveRight(posEntity, glm::ivec2(32, 32))) 
-		changeDirection();
 	
 	posEntity.x += horSpeed*movementDir;
 	posEntity.y += vertSpeed*vertDirection;

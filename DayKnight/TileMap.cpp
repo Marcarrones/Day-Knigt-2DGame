@@ -118,27 +118,20 @@ void TileMap::setPositions(char tile, const glm::ivec2 &entityPos) {
 		playerPos = entityPos;
 		break;
 	case 'k':	// KEY
-		keyPos = entityPos;
+		keyPos = entityPos + glm::ivec2(0, tileSize);
 		break;
 	case 'd':	// EXIT DOOR
 		exitPos = entityPos;
 		break;
 	case 'c': // CLOCK
-		clockPos = entityPos;
+		clockPos = entityPos + glm::ivec2(0, tileSize);
 		break;
 	case 'g':
-		gemPos = entityPos;
+		gemPos = entityPos + glm::ivec2(0, tileSize);
 		break;
 	case 'h':
-		healthPos = entityPos;
+		healthPos = entityPos + glm::ivec2(0, tileSize);
 		break;
-		//ITEMS
-	case 'i':
-		itemPos.push(entityPos);
-		break;
-
-
-
 		//ENEMIES
 	case 'e':
 		enemy1Pos.push(entityPos);
@@ -147,7 +140,7 @@ void TileMap::setPositions(char tile, const glm::ivec2 &entityPos) {
 		enemy2Pos.push(entityPos);
 		break;
 	case 't':
-		enemy3Pos.push(entityPos + glm::ivec2(0,16) );
+		enemy3Pos.push(entityPos + glm::ivec2(0, tileSize) );
 		break;
 	}
 	return;

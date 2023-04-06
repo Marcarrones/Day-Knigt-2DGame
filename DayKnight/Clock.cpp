@@ -5,20 +5,15 @@ enum {
 	PICKED
 };
 
-Clock::Clock()
-{
-}
+
 
 void Clock::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 {
-	Entity::init(tileMapPos, shaderProgram);
+	tileMapDispl = tileMapPos;
+	collider.init(&posEntity, 16, 16, &shaderProgram);
 	initSprite(shaderProgram);
 	timeToStop = 0.0;
 	picked = false;
-}
-
-Clock::~Clock()
-{
 }
 
 void Clock::update(int deltaTime)
@@ -32,15 +27,6 @@ void Clock::update(int deltaTime)
 	}
 }
 
-void Clock::render()
-{
-	Entity::render();
-}
-
-void Clock::setTileMap(TileMap * tileMap)
-{
-	map = tileMap;
-}
 
 void Clock::StopTime()
 {
@@ -67,7 +53,7 @@ bool Clock::ispicked()
 void Clock::initSprite(ShaderProgram & shaderProgram)
 {
 	spritesheet.loadFromFile("images/Objetos/Clock.png", TEXTURE_PIXEL_FORMAT_RGBA);
-	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 1), &spritesheet, &shaderProgram);
+	sprite = Sprite::createSprite(glm::ivec2(16,16), glm::vec2(0.25, 1), &spritesheet, &shaderProgram);
 
 	sprite->setNumberAnimations(2);
 
