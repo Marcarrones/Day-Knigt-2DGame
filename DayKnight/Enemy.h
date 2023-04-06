@@ -6,25 +6,15 @@
 class Enemy : public Entity
 {
 public:
-
-
-	void init(const glm::ivec2 &tileMapPos, ShaderProgram &shaderProgram);
 	
-	void update(int deltaTime) override;
-	void changeDirection();
-	//void render();
+	void changeDirection() { movementDir *= -1; };
 
 	virtual bool collidedBy(ICollider *collider) override 
 		{ return collider->collideWith(this); }
 
-
-	void setTileMap(TileMap *tileMap);
-	//void setPosition(const glm::vec2 &pos);
-
 	int enemySpeed = 1;
 
-private:
-	void initSprite(ShaderProgram &shaderProgram);
+protected:
 
 	int movementDir = 1; // 1 -> Right : -1 -> Left
 };

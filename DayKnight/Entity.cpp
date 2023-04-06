@@ -7,10 +7,9 @@ void Entity::init(const glm::ivec2 & tileMapPos, ShaderProgram & shaderProgram)
 	if (sprite == NULL) {
 		sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(0.25, 0.25), &spritesheet, &shaderProgram);
 	}
-	//posEntity = glm::ivec2(0, 0);
 
 	tileMapDispl = tileMapPos;
-	collider.init(&posEntity, 32, 32, false, &shaderProgram);
+	collider.init(&posEntity, 32, 32, &shaderProgram);
 	
 	initSprite(shaderProgram);
 }

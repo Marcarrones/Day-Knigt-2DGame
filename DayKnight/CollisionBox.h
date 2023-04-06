@@ -32,7 +32,7 @@ public:
 
 	~CollisionBox();
 	
-	void init(glm::ivec2 *position, int height, int width, bool isStatic, ShaderProgram *shaderProgram);
+	void init(glm::ivec2 *position, int height, int width, ShaderProgram *shaderProgram);
 
 	void render();
 
@@ -45,7 +45,6 @@ public:
 private:
 	int _height;
 	int _width;
-	bool _isStatic;
 	glm::ivec2 *_position;
 	Sprite  *_debugBox;
 };
