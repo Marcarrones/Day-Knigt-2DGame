@@ -6,6 +6,8 @@
 #include "Text.h"
 #include <string.h>
 #include "SkeletonEnemy.h"
+#include "VampireEnemy.h"
+#include "SkullEnemy.h"
 
 // HACER GLOBALES?
 //#define SCREEN_X 32
@@ -51,25 +53,6 @@ void Scene::init()
 void Scene::restart()
 {
 	changelevel(level);
-	return;
-    /*	currentTime = 0.0f;
-	menuSuperior = new MenuSuperior();
-	menuSuperior->init(glm::ivec2(SCREEN_X + 16, SCREEN_Y + 32), texProgram);
-	map = TileMap::createTileMap("levels/level01.txt", glm::vec2(SCREEN_X, SCREEN_Y), texProgram);
-	player = new Player();
-	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	player->setPosition(glm::vec2(map->playerPos));
-	player->setTileMap(map);
-	playerPoints = 0;
-	menuSuperior->changeLive(player->getlive());
-	cuentaAtras = 60000.f;
-	inScreenKey = false;
-	//startEndDoor = new StartEndDoor();
-	//startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	//enemy = new Enemy1();
-	//enemy->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	//enemy->setPosition(glm::vec2(100, 50));
-	*/
 }
 
 void Scene::finishLevel()
@@ -248,12 +231,39 @@ void Scene::initEntities() {
 		positions.pop();
 	}
 
-	// Door pos
+	// Enemy 2
 
+	positions = map->enemy2Pos;
+	while (!positions.empty()) {
+		Enemy* n = new VampireEnemy();
+
+		n->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+		n->setPosition(positions.top());
+		n->setTileMap(map);
+
+		entites.push_back(n);
+		positions.pop();
+	}
+
+	// Enemy 3
+	positions = map->enemy3Pos;
+	while (!positions.empty()) {
+		Enemy* n = new SkullEnemy();
+
+		n->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+		n->setPosition(positions.top());
+		n->setTileMap(map);
+
+		entites.push_back(n);
+		positions.pop();
+	}
+
+	// Door pos
 
 	startEndDoor = new StartEndDoor();
 	startEndDoor->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
-	glm::vec2 exitPos = map->exitPos;
+	glm::vec2 exitPos = map->exitPos; // == NULL ? map->playerPos : map->exitPos;
+
 	exitPos.y += 16;
 	exitPos.x += 16;
 	// TODO: Revisar esto porque si no se a�ade 16 de altura se queda arriba

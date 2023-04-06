@@ -47,6 +47,7 @@ private:
 	int _width;
 	glm::ivec2 *_position;
 	Sprite  *_debugBox;
+	Texture t;
 };
 
 #endif // _COLLISION_BOX

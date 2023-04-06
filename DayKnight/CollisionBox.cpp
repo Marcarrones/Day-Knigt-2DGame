@@ -15,7 +15,8 @@ void CollisionBox::init(glm::ivec2 *position, int height, int width, ShaderProgr
 	_position = position;
 	_height = height;
 	_width = width;
-	_debugBox = Sprite::createSprite(glm::vec2(height, width),glm::vec2(0,0), NULL, shaderProgram);
+	t.createEmptyTexture(width, height);
+	_debugBox = Sprite::createSprite(glm::vec2(height, width),glm::vec2(0,0), &t, shaderProgram);
 }
 
 void CollisionBox::render() {
