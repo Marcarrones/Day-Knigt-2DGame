@@ -82,7 +82,7 @@ private:
 	
 	MenuSuperior* menuSuperior;
 	float cuentaAtras;
-	int playerPoints;
+	int playerPoints,painTiles;
 	bool inScreenKey,pickHealth,pickGem;
 };
 

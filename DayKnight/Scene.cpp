@@ -92,6 +92,9 @@ void Scene::update(int deltaTime)
 {
 	currentTime += deltaTime;
 	cuentaAtras -= deltaTime;
+	if (cuentaAtras < 0.0) {
+		restart();
+	}
 	player->update(deltaTime);
 
 	background->update(deltaTime);
@@ -151,9 +154,8 @@ void Scene::update(int deltaTime)
 		// Visisbilidad llave
 		key->show();
 	
-		//finishLevel();
 	}
-
+	
 	// Abrir puerta
 	if (player->collideWith(key) && inScreenKey == true) {
 		startEndDoor->open();
@@ -162,7 +164,11 @@ void Scene::update(int deltaTime)
 
 	if (startEndDoor->isOpenClose()) {
 		//TODO: si esta abierto y la pos de jugador es igual que la puerta pasa a la siguiente pantalla
-		player->collideWith(startEndDoor);
+		if (player->collideWith(startEndDoor)){
+			playerPoints += cuentaAtras * 100;
+			finishLevel();
+
+		}
 		
 	}
 
@@ -179,6 +185,10 @@ void Scene::update(int deltaTime)
 		playerPoints += 500;
 		pickGem = true;
 	}
+
+	int tmpPoint = painTiles - map->remainingTiles();
+	painTiles = map->remainingTiles();
+	playerPoints += tmpPoint*10;
 	startEndDoor->update(deltaTime);
 	key->update(deltaTime);
 	clock->update(deltaTime);
@@ -266,6 +276,7 @@ void Scene::renderEntities() {
 void Scene::initEntities() {
 	if (map == nullptr) return;
 	// Player
+	painTiles = map->remainingTiles();
 	player = new Player();
 
 	player->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
