@@ -82,12 +82,12 @@ bool Player::collideWith(StartEndDoor * other)
 
 bool Player::collideWith(Gema * other)
 {
-	return false;
+	return collider.CheckColission(other->collider);
 }
 
 bool Player::collideWith(Health * other)
 {
-	return false;
+	return collider.CheckColission(other->collider);
 }
 
 
@@ -163,7 +163,7 @@ void Player::update(int deltaTime)
 	}
 	//position->SetPos(posPlayer.x, posPlayer.y);
 	paintTiles();
-	if (map->checkSpike(posEntity, glm::ivec2(32, 32))) {
+	if (map->checkSpike(posEntity, glm::ivec2(32, 32) ) && !immune) {
 		damagePlayer();
 	}
 

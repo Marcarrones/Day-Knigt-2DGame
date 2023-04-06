@@ -48,7 +48,7 @@ Gema::~Gema()
 
 void Gema::initSprite(ShaderProgram & shaderProgram)
 {
-	spritesheet.loadFromFile("images/Objetos/Gema.png", TEXTURE_PIXEL_FORMAT_RGBA);
+	spritesheet.loadFromFile("images/Gema.png", TEXTURE_PIXEL_FORMAT_RGBA);
 	sprite = Sprite::createSprite(glm::ivec2(32, 32), glm::vec2(1, 1), &spritesheet, &shaderProgram);
 
 	sprite->setNumberAnimations(2);

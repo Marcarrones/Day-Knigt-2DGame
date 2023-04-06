@@ -47,8 +47,8 @@ public:
 	int remainingTiles() { return paintableTiles - paintedTiles; }
 	int getPaintedTiles() { return paintedTiles; }
 
-	glm::ivec2 playerPos, keyPos, exitPos, clockPos;
-	std::stack<glm::ivec2> enemy1Pos, enemy2Pos, enemy3Pos, itemPos, stopwatchPos, gemPos;
+	glm::ivec2 playerPos, keyPos, exitPos, clockPos, healthPos, gemPos;
+	std::stack<glm::ivec2> enemy1Pos, enemy2Pos, enemy3Pos, itemPos, stopwatchPos;
 
 private:
 	bool loadLevel(const string &levelFile);

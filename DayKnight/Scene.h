@@ -11,6 +11,8 @@
 #include "StartEndDoor.h"
 #include "Key.h"
 #include "Clock.h"
+#include "Health.h"
+#include "Gema.h"
 #define SCREEN_X 32
 #define SCREEN_Y 16
 
@@ -74,12 +76,14 @@ private:
 	Key *key;
 	Clock *clock;
 	StartEndDoor* startEndDoor;
+	Gema *gema;
+	Health *health;
 	vector<Entity*> entites;
 	
 	MenuSuperior* menuSuperior;
 	float cuentaAtras;
 	int playerPoints;
-	bool inScreenKey;
+	bool inScreenKey,pickHealth,pickGem;
 };
 
 

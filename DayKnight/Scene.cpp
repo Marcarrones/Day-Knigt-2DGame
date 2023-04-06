@@ -165,10 +165,25 @@ void Scene::update(int deltaTime)
 		player->collideWith(startEndDoor);
 		
 	}
+
+	if (player->collideWith(health) && !pickHealth) {
+		health->pick();
+		int live = player->getlive();
+		live += 1;
+		player->changelive(live);
+		pickHealth = true;
+	}
 	
+	if (player->collideWith(gema) && !pickGem) {
+		gema->pick();
+		playerPoints += 500;
+		pickGem = true;
+	}
 	startEndDoor->update(deltaTime);
 	key->update(deltaTime);
 	clock->update(deltaTime);
+	gema->update(deltaTime);
+	health->update(deltaTime);
 	
 	if (player->getlive() < 0) {
 		restart();
@@ -232,6 +247,15 @@ void Scene::renderEntities() {
 		clock->render();
 	}
 
+	if (!gema->ispicked() && !pickGem) {
+		gema->render();
+	}
+	
+	if (!health->ispicked() && !pickHealth) {
+		health->render();
+	}
+
+
 }
 
 #pragma endregion
@@ -293,6 +317,20 @@ void Scene::initEntities() {
 	clock->setPosition(map->clockPos);
 	clock->setTileMap(map);
 
+	// Health pos 
+
+	health = new Health();
+	health->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	health->setPosition(map->healthPos);
+	health->setTileMap(map);
+	pickHealth = false;
+	// Gem pos 
+
+	gema = new Gema();
+	gema->init(glm::ivec2(SCREEN_X, SCREEN_Y), texProgram);
+	gema->setPosition(map->gemPos);
+	gema->setTileMap(map);
+	pickGem = false;
 
 }
 
